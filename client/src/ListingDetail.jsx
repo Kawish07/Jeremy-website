@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import ContactModal from './components/ContactModal';
 import { Instagram, Facebook } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { getDummyListing } from './data/dummyListings';
 
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -29,7 +30,12 @@ export default function ListingDetail() {
       })
       .catch((err) => {
         console.error('Failed to load listing:', err);
-        setListing(null);
+        const dummy = getDummyListing(id);
+        if (dummy) {
+          setListing(dummy);
+        } else {
+          setListing(null);
+        }
         setLoading(false);
       });
   }, [id]);
@@ -44,7 +50,7 @@ export default function ListingDetail() {
       <section className="relative h-[80vh]">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${(listing.images && listing.images[0]) || listing.image || ''}')` }}
+            style={{ backgroundImage: `url('${listing.image || (listing.images && listing.images[0]) || 'https://via.placeholder.com/1600x900?text=Property+Image'}')` }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-30" />
         </div>

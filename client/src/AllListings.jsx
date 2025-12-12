@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Instagram, Facebook, MapPin, Bed, Bath, Maximize } from 'lucide-react';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
+import { getDummyListings } from './data/dummyListings';
 import profilePic from './Public/images/Philip_profile_picture.png';
 import { useEffect, useRef } from 'react';
 
@@ -13,6 +14,8 @@ export default function AllListings({ onBack }) {
 
     const [listings, setListings] = useState([]);
     const mountedRef = useRef(true);
+
+    // dummy listings are provided by shared module (stable ids)
 
     useEffect(() => {
         mountedRef.current = true;
@@ -25,10 +28,11 @@ export default function AllListings({ onBack }) {
                 if (!mountedRef.current) return;
                 setListings(data);
             })
-            .catch((err) => {
-                console.error('Failed to load listings:', err);
-                setListings([]);
-            });
+                .catch((err) => {
+                    console.error('Failed to load listings:', err);
+                    // fallback to dummy sample listings when backend is down
+                    setListings(getDummyListings());
+                });
         return () => { mountedRef.current = false; };
     }, []);
 
@@ -147,12 +151,15 @@ export default function AllListings({ onBack }) {
                     {filteredListings.map((listing, idx) => {
                         const statusBadge = getStatusBadge(listing.status);
                         const idValue = listing._id || listing.id || idx;
+                        if (!listing.image && (!listing.images || listing.images.length === 0)) {
+                            console.warn('Listing missing image, using placeholder:', idValue);
+                        }
                         return (
                             <article key={idValue} className="bg-white group overflow-hidden">
                                 <Link to={idValue ? `/listing/${idValue}` : '#'} className="block">
                                     <div className="relative overflow-hidden h-80">
                                         <img
-                                            src={(listing.images && listing.images[0]) || listing.image}
+                                            src={listing.image || (listing.images && listing.images[0]) || 'https://via.placeholder.com/1600x900?text=Property+Image'}
                                             alt={listing.title}
                                             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                                         />
