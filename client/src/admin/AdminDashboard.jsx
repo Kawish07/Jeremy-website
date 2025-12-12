@@ -198,7 +198,7 @@ const PropertyCharts = ({ listings, stats }) => {
           </div>
         </div>
         <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height={256}>
             <LineChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
               <XAxis dataKey="month" stroke="#666" />
@@ -245,7 +245,7 @@ const PropertyCharts = ({ listings, stats }) => {
           </div>
         </div>
         <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height={256}>
             <PieChart>
               <Pie
                 data={statusData.filter(item => item.value > 0)}
@@ -546,7 +546,7 @@ export default function AdminDashboard() {
                   + Add New
                 </button>
                 <button 
-                  onClick={() => navigate('/admin/listings')}
+                  onClick={() => navigate('/All-listings')}
                   className="px-4 py-2 border-2 border-gray-800 text-gray-800 text-sm font-medium rounded-lg hover:bg-gray-800 hover:text-white transition-all duration-200"
                 >
                   View All

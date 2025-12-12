@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Routes, Route, useLocation, Outlet } from 'react-router-dom'
 import App from './App'
 import AllListings from './AllListings'
 import ListingDetail from './ListingDetail'
@@ -23,6 +23,18 @@ function PageWrapper({ children }) {
     <div key={location.pathname} className="page-transition min-h-screen">
       {children}
     </div>
+  );
+}
+
+function RootLayout() {
+  return (
+    <GlobalLoaderProvider>
+      <LenisProvider>
+        <AuthProvider>
+          <Outlet />
+        </AuthProvider>
+      </LenisProvider>
+    </GlobalLoaderProvider>
   );
 }
 
@@ -123,33 +135,30 @@ function GlobalLoaderProvider({ children }) {
   );
 }
 
+const router = createBrowserRouter([
+  {
+    element: <RootLayout />,
+    children: [
+      { path: '/', element: <PageWrapper><App /></PageWrapper> },
+      { path: '/all-listings', element: <PageWrapper><AllListings /></PageWrapper> },
+      { path: '/listing/:id', element: <PageWrapper><ListingDetail /></PageWrapper> },
+      { path: '/staging', element: <PageWrapper><Staging /></PageWrapper> },
+      { path: '/testimonials', element: <PageWrapper><Testimonials /></PageWrapper> },
+      { path: '/admin/login', element: <AdminLogin /> },
+      { path: '/admin/signup', element: <AdminSignup /> },
+      { path: '/admin', element: <PrivateRoute><PageWrapper><AdminDashboard /></PageWrapper></PrivateRoute> },
+      { path: '/admin/new', element: <PrivateRoute><PageWrapper><EditProperty /></PageWrapper></PrivateRoute> },
+      { path: '/admin/edit/:id', element: <PrivateRoute><PageWrapper><EditProperty /></PageWrapper></PrivateRoute> },
+      { path: '/admin/listings', element: <PrivateRoute><PageWrapper><AdminDashboard /></PageWrapper></PrivateRoute> },
+      { path: '/admin/active', element: <PrivateRoute><PageWrapper><AdminDashboard /></PageWrapper></PrivateRoute> },
+      { path: '/admin/sold', element: <PrivateRoute><PageWrapper><AdminDashboard /></PageWrapper></PrivateRoute> },
+    ]
+  }
+])
+
 const root = createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <GlobalLoaderProvider>
-        <LenisProvider>
-          <AuthProvider>
-            <Routes>
-              <Route path="/" element={<PageWrapper><App /></PageWrapper>} />
-              <Route path="/all-listings" element={<PageWrapper><AllListings /></PageWrapper>} />
-              <Route path="/listing/:id" element={<PageWrapper><ListingDetail /></PageWrapper>} />
-              <Route path="/staging" element={<PageWrapper><Staging /></PageWrapper>} />
-              <Route path="/testimonials" element={<PageWrapper><Testimonials /></PageWrapper>} />
-
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="/admin/signup" element={<AdminSignup />} />
-
-              <Route path="/admin" element={<PrivateRoute><PageWrapper><AdminDashboard /></PageWrapper></PrivateRoute>} />
-              <Route path="/admin/new" element={<PrivateRoute><PageWrapper><EditProperty /></PageWrapper></PrivateRoute>} />
-              <Route path="/admin/edit/:id" element={<PrivateRoute><PageWrapper><EditProperty /></PageWrapper></PrivateRoute>} />
-              <Route path="/admin/listings" element={<PrivateRoute><PageWrapper><AdminDashboard /></PageWrapper></PrivateRoute>} />
-              <Route path="/admin/active" element={<PrivateRoute><PageWrapper><AdminDashboard /></PageWrapper></PrivateRoute>} />
-              <Route path="/admin/sold" element={<PrivateRoute><PageWrapper><AdminDashboard /></PageWrapper></PrivateRoute>} />
-            </Routes>
-          </AuthProvider>
-        </LenisProvider>
-      </GlobalLoaderProvider>
-    </BrowserRouter>
+    <RouterProvider router={router} future={{ v7_startTransition: true, v7_relativeSplatPath: true }} />
   </React.StrictMode>
 )

@@ -9,7 +9,7 @@ export default function ContactModal({ open = false, onClose = () => { } }) {
     const timeoutRef = useRef(null);
     const submitTimeoutRef = useRef(null);
 
-    const [form, setForm] = useState({ name: '', email: '', phone: '', bestTime: '' });
+    const [form, setForm] = useState({ name: '', email: '', phone: '', bestTime: '', message: '' });
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(null);
@@ -57,17 +57,26 @@ export default function ContactModal({ open = false, onClose = () => { } }) {
         }
         setLoading(true);
         try {
-            const res = await fetch(`${API}/api/letsconnect`, {
+            // send as a contact record so it stores in `contacts`
+            const payload = {
+                name: form.name,
+                email: form.email,
+                phone: form.phone,
+                // include preferred time inside message for reference
+                message: form.message || (form.bestTime ? `Preferred time: ${form.bestTime}` : '')
+            };
+
+            const res = await fetch(`${API}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form),
+                body: JSON.stringify(payload),
             });
             if (!res.ok) {
                 const text = await res.text();
                 throw new Error(text || 'Server error');
             }
             setSuccess(true);
-            setForm({ name: '', email: '', phone: '', message: '' });
+            setForm({ name: '', email: '', phone: '', bestTime: '', message: '' });
             // auto-close after a short delay
             submitTimeoutRef.current = setTimeout(() => {
                 handleClose();

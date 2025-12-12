@@ -163,13 +163,38 @@ export default function App() {
         return () => window.removeEventListener('startPageLoad', onStart);
     }, []);
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        setPopupSubmitted(true);
+        // basic validation
+        if (!formData.name || !formData.email) return alert('Please provide name and email');
+        try {
+            const res = await fetch(`${API}/api/popup`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    consent: !!formData.consent,
+                    message: formData.message || '',
+                    source: 'homepage-popup'
+                })
+            });
+            if (!res.ok) {
+                const txt = await res.text();
+                throw new Error(txt || 'Server error');
+            }
+            setPopupSubmitted(true);
+            setFormData({ name: '', phone: '', email: '', interest: '', message: '', bestTime: '', consent: false });
+        } catch (err) {
+            console.error('Popup submit failed', err);
+            alert('Failed to submit. Please try again later.');
+        }
     };
 
     const handleInputChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, type, value, checked } = e.target;
+        setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
     };
 
     const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';

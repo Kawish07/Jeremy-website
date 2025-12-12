@@ -5,10 +5,10 @@ export default function PageLoader({ open = false }) {
   if (!open) return null;
 
   const loader = (
-    <div className="page-loader-overlay fixed inset-0 z-[99999] flex items-center justify-center bg-black" aria-hidden>
+    <div className="page-loader-overlay fixed inset-0 z-[99999] flex items-center justify-center bg-black" aria-hidden="true">
       <div className="loader-inner text-center">
         {/* 3D Rotating Cube Loader */}
-        <div className="loader-3d mb-8" aria-hidden>
+        <div className="loader-3d mb-8" aria-hidden="true">
           <div className="cube-scene">
             <div className="cube">
               <div className="cube-face cube-front"></div>
@@ -46,7 +46,7 @@ export default function PageLoader({ open = false }) {
         </div>
       </div>
       
-      <style jsx>{`
+      <style>{`
         /* 3D Cube Loader */
         .loader-3d {
           position: relative;

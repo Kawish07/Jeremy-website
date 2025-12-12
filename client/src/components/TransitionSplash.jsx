@@ -37,7 +37,7 @@ export default function TransitionSplash() {
 
   const splash = (
     <div className="transition-splash-overlay fixed inset-0 pointer-events-none z-[100000]">
-      <div className="splash-center" aria-hidden />
+      <div className="splash-center" aria-hidden="true" />
     </div>
   );
 

@@ -64,7 +64,7 @@ export default function CustomCursor() {
   if (!enabled) return null;
 
   const cursor = (
-    <div aria-hidden className="pointer-events-none">
+    <div aria-hidden="true" className="pointer-events-none">
       <div ref={ringRef} className={`custom-cursor-ring`} />
       <div ref={dotRef} className={`custom-cursor-dot`} />
     </div>
