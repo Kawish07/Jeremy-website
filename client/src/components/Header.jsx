@@ -22,7 +22,7 @@ export default function Header({ onBack, light = false }) {
     const useWhite = isAllListings;
     const rightLinkClass = useWhite ? 'text-white font-semibold text-base md:text-lg hover:opacity-80 transition-opacity' : 'text-black font-semibold text-base md:text-lg hover:opacity-70 transition-opacity';
     // icon: white on small screens only, black on sm+ (medium and large)
-    const rightIconClass = 'w-5 h-5 text-white sm:text-black';
+    const rightIconClass = useWhite ? 'w-5 h-5 text-white' : 'w-5 h-5 text-white sm:text-black';
     const timeoutRef = useRef(null);
     const [contactOpen, setContactOpen] = useState(false);
 
