@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Menu, X, Instagram, Facebook } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { getLenis, subscribeToScroll } from '../lib/lenis';
 import ContactModal from './ContactModal';
 
 export default function Header({ onBack, light = false }) {
@@ -70,13 +69,13 @@ export default function Header({ onBack, light = false }) {
                     ticking.current = true;
                 }
             };
-
-            const unsubscribe = subscribeToScroll(handleScroll);
+            const _nativeHandler = () => handleScroll(window.scrollY);
+            window.addEventListener('scroll', _nativeHandler, { passive: true });
             // listen for global open contact modal events
             const onOpenContact = () => setContactOpen(true);
             window.addEventListener('openContactModal', onOpenContact);
             return () => {
-                try { unsubscribe && unsubscribe(); } catch (e) { /* noop */ }
+                try { window.removeEventListener('scroll', _nativeHandler); } catch (e) { }
                 window.removeEventListener('openContactModal', onOpenContact);
             };
     }, []);
@@ -84,21 +83,16 @@ export default function Header({ onBack, light = false }) {
     // helper: smooth-scroll to an anchor hash using Lenis when available
     const scrollToHash = (hash) => {
         try {
-            const el = document.querySelector(hash);
-            if (el) {
-                const top = el.getBoundingClientRect().top + window.scrollY;
-                const lenis = getLenis();
-                if (lenis && typeof lenis.scrollTo === 'function') {
-                    lenis.scrollTo(top, { immediate: false });
-                } else {
+                const el = document.querySelector(hash);
+                if (el) {
+                    const top = el.getBoundingClientRect().top + window.scrollY;
                     window.scrollTo({ top, behavior: 'smooth' });
+                    // clear any temporary hash in history
+                    window.history.replaceState({}, '', hash);
+                } else {
+                    // element not found yet; still set hash
+                    window.history.replaceState({}, '', hash);
                 }
-                // clear any temporary hash in history
-                window.history.replaceState({}, '', hash);
-            } else {
-                // element not found yet; still set hash
-                window.history.replaceState({}, '', hash);
-            }
         } catch (e) {
             // noop
         }

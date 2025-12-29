@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { suspendFallback, resumeFallback } from '../lib/lenis';
 import { createPortal } from 'react-dom';
 import { X, Instagram } from 'lucide-react';
 
@@ -15,14 +14,9 @@ export default function ContactModal({ open = false, onClose = () => { } }) {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        if (open) {
-            setClosing(false);
-            try { suspendFallback(); } catch (e) { }
-        } else {
-            try { resumeFallback(); } catch (e) { }
-        }
-    }, [open]);
+        useEffect(() => {
+            if (open) setClosing(false);
+        }, [open]);
 
     useEffect(() => {
         const onKey = (e) => {
