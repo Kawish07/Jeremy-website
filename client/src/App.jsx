@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { X, Instagram, Facebook } from "lucide-react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { getLenis, subscribeToScroll } from "./lib/lenis";
+import { getLenis, subscribeToScroll, suspendFallback, resumeFallback } from "./lib/lenis";
 import PageLoader from "./components/PageLoader";
 import TransitionSplash from "./components/TransitionSplash";
 import FloatingCTA from "./components/FloatingCTA";
@@ -67,6 +67,15 @@ export default function App() {
       try { unsubscribe && unsubscribe(); } catch (e) { /* noop */ }
     };
   }, []);
+
+  // when popup opens, suspend Lenis watchdog so showing the popup doesn't trigger fallback
+  useEffect(() => {
+    if (showPopup) {
+      try { suspendFallback(); } catch (e) { }
+    } else {
+      try { resumeFallback(); } catch (e) { }
+    }
+  }, [showPopup]);
 
   // Handle scroll to anchor from navigation state
   useEffect(() => {
