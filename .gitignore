@@ -1,18 +1,65 @@
-node_modules
-dist
-# Edit your .gitignore to add these critical lines
-Add-Content -Path .gitignore @"
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
 
-# Server environment files
+# Environment variables (CRITICAL - never commit these!)
+.env
+.env.local
+.env.development
+.env.production
+.env*.local
 server/.env
 server/.env.*
-server/*.env
+client/.env.local
+client/.env.production
 
-# Uploads and media files (should be in cloud storage, not Git)
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Uploads and temporary files
 server/uploads/
-server/public/uploads/
 server/temp/
+uploads/
+temp/
 
-# Or be more specific if you want to keep some images
-# !src/Public/images/keep-this-one.jpg
-"@
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Cache
+.cache/
+.eslintcache
+
+# Testing
+.coverage/
+.nyc_output/

@@ -3,17 +3,17 @@ const { sendNotificationEmail } = require('../lib/mailer');
 
 exports.create = async (req, res) => {
   try {
-    const { name, email, phone, bestTime, timezone } = req.body || {};
+    const { name, email, phone, bestTime, timezone, interest } = req.body || {};
     if (!name || !email || !bestTime) return res.status(400).json({ error: 'Missing required fields' });
     const bt = bestTime ? new Date(bestTime) : null;
-    const created = await LetsConnect.create({ name, email, phone: phone || '', bestTime: bt, timezone: timezone || 'ET' });
+    const created = await LetsConnect.create({ name, email, phone: phone || '', bestTime: bt, timezone: timezone || 'ET', interest: interest || '' });
 
     // Send notification email
     try {
       await sendNotificationEmail({
         subject: 'New LetsConnect Submission',
-        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || ''}\nBest Time: ${bestTime}\nTimezone: ${timezone || 'ET'}`,
-        html: `<h2>New LetsConnect Submission</h2><p><b>Name:</b> ${name}<br/><b>Email:</b> ${email}<br/><b>Phone:</b> ${phone || ''}<br/><b>Best Time:</b> ${bestTime}<br/><b>Timezone:</b> ${timezone || 'ET'}</p>`
+        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || ''}\nInterested In: ${interest || 'Not specified'}\nBest Time: ${bestTime}\nTimezone: ${timezone || 'ET'}`,
+        html: `<h2>New LetsConnect Submission</h2><p><b>Name:</b> ${name}<br/><b>Email:</b> ${email}<br/><b>Phone:</b> ${phone || ''}<br/><b>Interested In:</b> ${interest || 'Not specified'}<br/><b>Best Time:</b> ${bestTime}<br/><b>Timezone:</b> ${timezone || 'ET'}</p>`
       });
     } catch (mailErr) {
       console.error('Failed to send letsconnect email:', mailErr);

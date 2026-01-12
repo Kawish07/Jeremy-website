@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
-const API = import.meta.env.VITE_API_URL;
+import { API } from '../lib/image';
 
 export default function EditProperty() {
   const { id } = useParams();

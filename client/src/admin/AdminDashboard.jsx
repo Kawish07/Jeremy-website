@@ -6,11 +6,10 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 
-const API = import.meta.env.VITE_API_URL;
-import { resolveImage, ensureProtocol, placeholderDataUrl } from '../lib/image';
+import { resolveImage, ensureProtocol, placeholderDataUrl, API } from '../lib/image';
 
 // Sidebar Component
-const Sidebar = ({ stats, admin }) => {
+const Sidebar = ({ stats, admin, isOpen, onClose }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -27,9 +26,31 @@ const Sidebar = ({ stats, admin }) => {
   };
 
   return (
-    <div className="w-64 bg-gradient-to-b from-gray-900 to-black text-white min-h-screen shadow-2xl">
-      {/* Logo */}
-      <div className="p-6 border-b border-gray-800">
+    <>
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+      
+      {/* Sidebar */}
+      <div className={`fixed lg:static inset-y-0 left-0 w-64 bg-gradient-to-b from-gray-900 to-black text-white min-h-screen shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+        isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+      }`}>
+        {/* Mobile Close Button */}
+        <button
+          onClick={onClose}
+          className="lg:hidden absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 transition-all"
+        >
+          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        {/* Logo */}
+        <div className="p-6 border-b border-gray-800">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-gradient-to-r from-white to-gray-300 rounded-xl flex items-center justify-center">
             <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,6 +135,7 @@ const Sidebar = ({ stats, admin }) => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 
@@ -420,6 +442,7 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState({ total: 0, active: 0, sold: 0, underContract: 0 });
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(new Date());
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const auth = useAuth();
@@ -501,10 +524,19 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex">
       {/* Sidebar */}
-      <Sidebar stats={stats} admin={admin} />
+      <Sidebar stats={stats} admin={admin} isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Main Content */}
       <div className="flex-1 overflow-auto">
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="lg:hidden fixed top-4 left-4 z-30 w-10 h-10 flex items-center justify-center rounded-lg bg-black text-white shadow-lg hover:bg-gray-800 transition-all"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
         {/* Top Bar */}
         <div className="bg-gradient-to-r from-white to-gray-50 border-b border-gray-200">
           <div className="flex flex-col md:flex-row md:items-center justify-between px-8 py-4">

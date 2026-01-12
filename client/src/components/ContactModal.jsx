@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Instagram } from 'lucide-react';
-
-const API = import.meta.env.VITE_API_URL;
+import { API } from '../lib/image';
 
 export default function ContactModal({ open = false, onClose = () => { } }) {
     const [closing, setClosing] = useState(false);
@@ -48,8 +47,6 @@ export default function ContactModal({ open = false, onClose = () => { } }) {
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-    const FORMSPREE_URL = 'https://formspree.io/f/xjgvjjzy';
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
@@ -59,7 +56,7 @@ export default function ContactModal({ open = false, onClose = () => { } }) {
         }
         setLoading(true);
         try {
-            // construct payload for both Formspree and backend
+            // construct payload for backend
             const payload = {
                 name: form.name,
                 email: form.email,
@@ -68,42 +65,16 @@ export default function ContactModal({ open = false, onClose = () => { } }) {
                 message: form.message || (form.bestTime ? `Preferred time: ${form.bestTime}` : '')
             };
 
-            // submit to Formspree (sends email)
-            const fsReq = fetch(FORMSPREE_URL, {
+            // submit to backend (sends email via SendGrid and persists data)
+            const response = await fetch(`${API}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
             });
 
-            // also submit to backend to persist contact (best-effort)
-            const backendReq = fetch(`${API}/api/contact`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: payload.name,
-                    email: payload.email,
-                    phone: payload.phone,
-                    message: payload.message,
-                }),
-            });
-
-            // wait for both requests but treat them independently
-            const results = await Promise.allSettled([fsReq, backendReq]);
-
-            const fsResult = results[0];
-            const backendResult = results[1];
-
-            const fsOk = fsResult.status === 'fulfilled' && fsResult.value && fsResult.value.ok;
-            const backendOk = backendResult.status === 'fulfilled' && backendResult.value && backendResult.value.ok;
-
-            if (!fsOk && !backendOk) {
-                // both failed
-                let msg = 'Failed to send message. Please try again.';
-                // try to extract an error body from fulfilled responses
-                if (fsResult.status === 'fulfilled' && fsResult.value && !fsResult.value.ok) {
-                    try { msg = await fsResult.value.text(); } catch (e) { /* ignore */ }
-                }
-                throw new Error(msg);
+            if (!response.ok) {
+                const errorText = await response.text().catch(() => 'Failed to send message');
+                throw new Error(errorText || 'Failed to send message. Please try again.');
             }
 
             setSuccess(true);
@@ -163,15 +134,15 @@ export default function ContactModal({ open = false, onClose = () => { } }) {
                                     <div className="space-y-6">
                                         <div>
                                             <p className="text-white text-sm">PHONE</p>
-                                            <p className="text-white">(613) 795-7804</p>
+                                            <p className="text-white">+1 (915) 478-6565</p>
                                         </div>
                                         <div>
                                             <p className="text-white text-sm">EMAIL</p>
-                                            <p className="text-white">phil.parnanzone@gmail.com</p>
+                                            <p className="text-white">concepcionpena1956@yahoo.com</p>
                                         </div>
                                         <div>
                                             <p className="text-white text-sm">ADDRESS</p>
-                                            <p className="text-white">371 Richmond Road, Ottawa, ON</p>
+                                            <p className="text-white">10600 Montwood Dr Suite #125, El Paso, TX 79935, United States</p>
                                         </div>
                                     </div>
 

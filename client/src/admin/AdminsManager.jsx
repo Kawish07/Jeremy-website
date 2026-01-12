@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from './AuthProvider';
 
-// API base: prefer VITE_API_URL; in development fallback to relative path '' so Vite dev proxy works;
-// in production default to the admin domain.
-const API = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? '' : 'https://admin.parnanzonehomes.com');
+import { API } from '../lib/image';
 
 export default function AdminsManager() {
   const { token } = useAuth();

@@ -7,14 +7,14 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
           <h3 className="text-3xl tracking-widest mb-1 font-light">
-            Philip Parnanzone
+            Concepcion Pena
           </h3>
           <div className="mb-8 relative">
             <h2 className="text-sm md:text-lg font-light text-white tracking-[0.3em] uppercase">
-              Broker
+              Broker and Owner
             </h2>
             <h2 className="text-sm md:text-lg font-light text-white tracking-[0.3em] uppercase">
-              The Agency Ottawa
+              Colonial Real Estate 
             </h2>
 
             <div className="w-24 h-1 bg-yellow-400 mt-2"></div>
@@ -25,8 +25,7 @@ export default function Footer() {
                 <p className="text-sm tracking-widest mb-4 font-light">
                   LICENSED IN
                 </p>
-                <p className="text-sm tracking-widest font-light">Ontario</p>
-                <p className="text-sm tracking-widest font-light">Canada</p>
+                <p className="text-sm tracking-widest font-light">United States</p>
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
@@ -51,10 +50,10 @@ export default function Footer() {
                         EMAIL
                       </p>
                       <a
-                        href="mailto:THEPHILIPSCHEINFELDTEAM@COMPASS.COM"
+                        href="mailto:concepcionpena1956@yahoo.com"
                         className="text-sm underline hover:opacity-70 font-light break-all"
                       >
-                        phil.parnanzone@gmail.com
+                        concepcionpena1956@yahoo.com
                       </a>
                     </div>
                   </div>
@@ -85,7 +84,7 @@ export default function Footer() {
                         ADDRESS
                       </p>
                       <p className="text-sm font-light">
-                        371 richmond road, Ottawa, ON K2A 0B7{" "}
+                        10600 Montwood Dr Suite #125, El Paso, TX 79935, United States
                       </p>
                     </div>
                   </div>
@@ -112,10 +111,10 @@ export default function Footer() {
                       PHONE NUMBER
                     </p>
                     <a
-                      href="tel:613137957804"
+                      href="tel:+19154786565"
                       className="text-sm underline hover:opacity-70 font-light"
                     >
-                      (613) 795-7804
+                      +1 (915) 478-6565
                     </a>
                   </div>
                 </div>
@@ -133,19 +132,11 @@ export default function Footer() {
               </a>
             </div>
             <p className="text-xs leading-relaxed text-gray-400 max-w-5xl mb-8 font-light">
-              The Agency fully supports the Equal Housing Opportunity laws. The
-              Agency IP Holdco, LLC and its parents, affiliates, subsidiaries,
-              franchisees of its affiliates, and network partners make no
-              representations, warranties, or guaranties as to the accuracy of
-              the information contained herein, including square footage, lot
-              size or other information concerning the condition, suitability or
-              features of the property. All material is intended for
-              informational purposes only and has been obtained from public
-              records, MLS, or other sources believed to be reliable, but not
-              verified. All prospective buyers should conduct a careful,
-              independent investigation of the information and property, and
-              consult with appropriate professionals, such as appraisers,
-              architects, civil engineers, etc. CalDRE #01904054
+              Dedicated to helping buyers and sellers navigate the real estate
+              process with confidence, professionalism, and personalized
+              service. A U.S. Navy veteran with more than 20 years of combined
+              active and reserve service, Concepcion brings discipline,
+              integrity, and strong leadership to every transaction.
             </p>
           </div>
 
@@ -154,9 +145,7 @@ export default function Footer() {
               Powered by <span className="font-medium">Realizty Inc</span>
             </p>
             <div className="flex items-center space-x-6">
-              <p className="text-sm font-light">
-                Copyright © 2025 |{" "}
-              </p>
+              <p className="text-sm font-light">Copyright © 2025 | </p>
               <div className="flex space-x-3">
                 <a
                   href="https://www.instagram.com/theagency.ottawa/?hl=en"

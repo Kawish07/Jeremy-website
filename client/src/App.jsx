@@ -5,7 +5,7 @@ import { X, Instagram, Facebook } from "lucide-react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { getLenis } from "./lib/lenis";
-import { resolveImage, ensureProtocol } from "./lib/image";
+import { resolveImage, ensureProtocol, API } from "./lib/image";
 import PageLoader from "./components/PageLoader";
 import TransitionSplash from "./components/TransitionSplash";
 import FloatingCTA from "./components/FloatingCTA";
@@ -64,9 +64,13 @@ export default function App() {
     };
 
     const _nativeHandler = () => handleScroll(window.scrollY);
-    window.addEventListener('scroll', _nativeHandler, { passive: true });
+    window.addEventListener("scroll", _nativeHandler, { passive: true });
     return () => {
-      try { window.removeEventListener('scroll', _nativeHandler); } catch (e) { /* noop */ }
+      try {
+        window.removeEventListener("scroll", _nativeHandler);
+      } catch (e) {
+        /* noop */
+      }
     };
   }, []);
 
@@ -180,8 +184,6 @@ export default function App() {
     if (!formData.name || !formData.email)
       return alert("Please provide name and email");
     try {
-      const FORMSPREE_POPUP = 'https://formspree.io/f/xgoerdvr';
-
       const payload = {
         name: formData.name,
         email: formData.email,
@@ -191,31 +193,14 @@ export default function App() {
         source: "homepage-popup",
       };
 
-      const fsReq = fetch(FORMSPREE_POPUP, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const backendReq = fetch(`${API}/api/popup`, {
+      const response = await fetch(`${API}/api/popup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      const results = await Promise.allSettled([fsReq, backendReq]);
-      const fsResult = results[0];
-      const backendResult = results[1];
-
-      const fsOk = fsResult.status === 'fulfilled' && fsResult.value && fsResult.value.ok;
-      const backendOk = backendResult.status === 'fulfilled' && backendResult.value && backendResult.value.ok;
-
-      if (!fsOk && !backendOk) {
-        let msg = 'Failed to submit. Please try again later.';
-        if (fsResult.status === 'fulfilled' && fsResult.value && !fsResult.value.ok) {
-          try { msg = await fsResult.value.text(); } catch (e) { /* ignore */ }
-        }
-        throw new Error(msg);
+      if (!response.ok) {
+        throw new Error("Failed to submit. Please try again later.");
       }
 
       setPopupSubmitted(true);
@@ -239,9 +224,7 @@ export default function App() {
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
   };
 
-  const API = import.meta.env.VITE_API_URL;
   const [featuredListing, setFeaturedListing] = useState(null);
-  const FORMSPREE_LETS = 'https://formspree.io/f/xykylogp';
 
   // Fetch latest listing for featured section
   useEffect(() => {
@@ -292,32 +275,17 @@ export default function App() {
         interest: formData.interest,
       };
 
-      // Submit to Formspree (email) and backend (persist) in parallel
-      const fsReq = fetch(FORMSPREE_LETS, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const backendReq = fetch(`${API}/api/letsconnect`, {
+      const response = await fetch(`${API}/api/letsconnect`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      const results = await Promise.allSettled([fsReq, backendReq]);
-      const fsResult = results[0];
-      const backendResult = results[1];
-
-      const fsOk = fsResult.status === 'fulfilled' && fsResult.value && fsResult.value.ok;
-      const backendOk = backendResult.status === 'fulfilled' && backendResult.value && backendResult.value.ok;
-
-      if (!fsOk && !backendOk) {
-        let msg = 'Failed to submit. Please try again.';
-        if (fsResult.status === 'fulfilled' && fsResult.value && !fsResult.value.ok) {
-          try { msg = await fsResult.value.text(); } catch (e) { /* ignore */ }
-        }
-        throw new Error(msg);
+      if (!response.ok) {
+        const errorText = await response.text().catch(() => "Failed to submit");
+        throw new Error(
+          errorText || "Failed to submit. Please try again later."
+        );
       }
 
       setLeftSubmitted(true);
@@ -359,7 +327,7 @@ export default function App() {
         <div className="grid md:grid-cols-2 h-[90vh]">
           <div className="relative h-full overflow-hidden">
             <img
-              src="images/newhomepagehero.jpg"
+              src="images/REALESTATEHEROSECTIONIMAGE.jpg"
               alt="Philip Parnanzone"
               className="hero-image w-full h-full object-cover transform -translate-y-6 md:-translate-y-10 scale-105"
             />
@@ -380,29 +348,32 @@ export default function App() {
           </div>
           <div className="hero-right flex flex-col justify-start mt-20 md:mt-28 pt-16 md:pt-20 pb-6 px-12 md:px-20 bg-white h-full relative overflow-hidden">
             <div className="absolute right-8 md:right-20 bottom-6 text-gray-100 text-8xl md:text-9xl font-serif font-bold opacity-10 pointer-events-none z-0">
-              Philip
+              Pena
             </div>
 
             <div className="relative z-10">
               <h1 className="text-5xl md:text-6xl font-serif mb-3 text-black">
                 <span className="relative inline-block">
-                  Philip
+                  Concepcion
                   <span className="absolute bottom-1 left-0 w-full h-3 bg-yellow-200 opacity-60 -z-10"></span>
                 </span>
-                Parnanzone
+                Pena
               </h1>
               <div className="mb-8 relative">
                 <h2 className="text-2xl md:text-3xl font-light text-gray-700 tracking-[0.3em] uppercase">
-                  Broker
+                  Broker and Owner
                 </h2>
                 <div className="w-24 h-1 bg-yellow-400 mt-3"></div>
               </div>
               <p className="text-base leading-relaxed mb-5 text-gray-800 max-w-lg">
-                Philip Parnanzone brings unparalleled dedication and savvy
-                negotiation to every real estate goal, turning first-time buyers
-                and seasoned investors alike into confident homeowners across
-                Ottawa and beyond, all with a keen local insight and a personal
-                touch.
+                Concepcion Pena is the Broker/Owner of Colonial Real Estate,
+                bringing over 20 years of real estate experience to help clients
+                buy and sell with confidence. A U.S. Navy veteran with more than
+                20 years of combined active and reserve service, he is known for
+                discipline, integrity, and results. Prior to real estate, he
+                worked for Rockwell International (later acquired by Boeing),
+                adding a strong corporate and analytical background to every
+                transaction.
               </p>
               <div className="flex space-x-4">
                 <button
@@ -461,22 +432,22 @@ export default function App() {
           </p>
           <div className="w-16 h-px bg-gray-800 mx-auto mb-6"></div>
           <h2 className="text-5xl md:text-6xl font-light mb-3 tracking-[0.4em] text-black">
-            Philip Parnanzone
+            Concepcion Pena
           </h2>
           <div className="mb-8 relative">
             <h2 className="text-2xl md:text-3xl font-light text-gray-700 tracking-[0.3em] uppercase">
-              Broker
+              Broker and Owner
             </h2>
           </div>
           <p className="text-base leading-relaxed mb-16 max-w-5xl mx-auto text-gray-800">
-            Driven by a commitment to excellence, Philip Parnanzone serves a
+            Driven by a commitment to excellence, Concepcion Pena serves a
             steadily growing network of buyers, sellers, investors, and
             relocating families across Ottawa and the surrounding markets.
-            Philip is known for delivering clear, data-backed real estate
+            Concepcion is known for delivering clear, data-backed real estate
             insight paired with an unwavering dedication to client success. His
             approach blends strategic marketing, sharp market intelligence, and
             a concierge level service experience, making it easy to see why
-            clients consistently choose Philip to lead their most important real
+            clients consistently choose Concepcion to lead their most important real
             estate decisions.
           </p>
           <div className="grid md:grid-cols-3 gap-12 mt-16">
@@ -597,12 +568,18 @@ export default function App() {
           <div>
             <h2 className="text-4xl md:text-5xl font-serif mb-8">About Me</h2>
             <p className="text-base leading-relaxed mb-8 text-gray-700">
-              As a trusted Ottawa real estate professional, Philip Parnanzone
-              has built a strong track record guiding clients through a wide
-              range of transactions, from single-family homes and urban condos
-              to investment properties and relocations. Follow Philip for market
-              insights, expert advice, and the latest real estate updates across
-              Ottawa and its surrounding communities!e Seattle & Eastside area!
+              I’m Concepcion Pena, Broker and Owner of Colonial Real Estate.
+              With over 20 years of experience in real estate, I’ve had the
+              opportunity to work with buyers and sellers through a wide range
+              of market conditions, always focusing on clear communication and
+              dependable guidance. Before entering real estate, I served more
+              than 20 years in the U.S. Navy in both active duty and reserve
+              roles, an experience that shaped my values of integrity,
+              discipline, and service. I also spent four years with Rockwell
+              International, later acquired by Boeing, which strengthened my
+              analytical and problem-solving skills. Today, I use this diverse
+              background to help clients make informed real estate decisions
+              with confidence.
             </p>
             <div className="flex space-x-4">
               <a
@@ -623,10 +600,10 @@ export default function App() {
             <video
               ref={videoRef}
               className="absolute top-0 left-0 w-full h-full object-cover"
-              poster="/images/philipnewimage2.jpg"
+              poster="https://images.pexels.com/photos/313691/pexels-photo-313691.jpeg"
               onClick={handleVideoPlay}
             >
-              <source src="/videos/video.mp4" type="video/mp4" />
+              <source src="https://www.pexels.com/download/video/7578550/" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
@@ -697,14 +674,16 @@ export default function App() {
             />
 
             <div
-              className={`fixed left-8 bottom-24 w-[320px] md:w-[420px] bg-[#0b0b0b] text-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 z-[110003] ${
+              className={`fixed left-4 right-4 bottom-20 sm:left-8 sm:right-auto sm:bottom-24 w-auto sm:w-[320px] md:w-[420px] max-w-[95vw] bg-[#0b0b0b] text-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 z-[110003] max-h-[85vh] overflow-y-auto ${
                 leftAnimating
                   ? "translate-y-0 opacity-100"
                   : "translate-y-6 opacity-0"
               }`}
             >
-              <div className="flex items-start justify-between px-6 pt-6">
-                <h3 className="text-2xl font-serif">Leave a Message</h3>
+              <div className="flex items-start justify-between px-4 sm:px-6 pt-4 sm:pt-6">
+                <h3 className="text-xl sm:text-2xl font-serif">
+                  Leave a Message
+                </h3>
                 <button
                   onClick={() => {
                     setLeftAnimating(false);
@@ -719,9 +698,12 @@ export default function App() {
                 </button>
               </div>
 
-              <div className="px-6 py-4">
+              <div className="px-4 sm:px-6 py-3 sm:py-4">
                 {!leftSubmitted ? (
-                  <form onSubmit={handleLeftSubmit} className="space-y-4">
+                  <form
+                    onSubmit={handleLeftSubmit}
+                    className="space-y-3 sm:space-y-4"
+                  >
                     <div>
                       <input
                         name="name"
@@ -729,7 +711,7 @@ export default function App() {
                         onChange={handleInputChange}
                         required
                         placeholder="Full Name"
-                        className="w-full px-3 py-3 bg-transparent border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
+                        className="w-full px-3 py-2 sm:py-3 bg-transparent border border-gray-600 rounded text-white text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
                       />
                     </div>
                     <div>
@@ -740,7 +722,7 @@ export default function App() {
                         onChange={handleInputChange}
                         required
                         placeholder="Email"
-                        className="w-full px-3 py-3 bg-transparent border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
+                        className="w-full px-3 py-2 sm:py-3 bg-transparent border border-gray-600 rounded text-white text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
                       />
                     </div>
                     <div>
@@ -751,7 +733,7 @@ export default function App() {
                         onChange={handleInputChange}
                         required
                         placeholder="Phone"
-                        className="w-full px-3 py-3 bg-transparent border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
+                        className="w-full px-3 py-2 sm:py-3 bg-transparent border border-gray-600 rounded text-white text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
                       />
                     </div>
                     <div className="relative">
@@ -760,7 +742,7 @@ export default function App() {
                         value={formData.interest}
                         onChange={handleInputChange}
                         required
-                        className="appearance-none w-full px-3 py-3 bg-transparent border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
+                        className="appearance-none w-full px-3 py-2 sm:py-3 bg-transparent border border-gray-600 rounded text-white text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
                       >
                         <option value="" disabled>
                           Interested in...
@@ -796,7 +778,7 @@ export default function App() {
                         value={formData.bestTime}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-3 bg-transparent border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
+                        className="w-full px-3 py-2 sm:py-3 bg-transparent border border-gray-600 rounded text-white text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
                       />
                     </div>
 
@@ -827,7 +809,7 @@ export default function App() {
                       <button
                         type="submit"
                         disabled={leftLoading}
-                        className="w-full bg-white text-black py-3 rounded font-semibold hover:bg-gray-100 hover:shadow-xl transform transition-all duration-200 disabled:opacity-50"
+                        className="w-full bg-white text-black py-2 sm:py-3 rounded font-semibold text-sm sm:text-base hover:bg-gray-100 hover:shadow-xl transform transition-all duration-200 disabled:opacity-50"
                       >
                         {leftLoading ? "SENDING..." : "Submit"}
                       </button>
@@ -885,31 +867,31 @@ export default function App() {
             onClick={() => setShowPopup(false)}
           />
           <div
-            className={`relative max-w-6xl w-full shadow-2xl rounded-lg overflow-hidden transform transition-all duration-700 ease-out ${
+            className={`relative max-w-6xl w-full mx-4 shadow-2xl rounded-lg overflow-hidden transform transition-all duration-700 ease-out ${
               showPopup
                 ? "scale-100 opacity-100 translate-y-0"
                 : "scale-90 opacity-0 translate-y-8"
             } ${popupSubmitted ? "bg-white" : ""}`}
             style={{
               backgroundColor: popupSubmitted ? "#ffffff" : "#141414",
-              maxHeight: "600px",
+              maxHeight: "90vh",
             }}
           >
             <button
               onClick={() => setShowPopup(false)}
-              className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 hover:rotate-90"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 hover:rotate-90"
             >
               <X className="w-5 h-5 text-black" />
             </button>
 
-            <div className="grid md:grid-cols-5" style={{ height: "600px" }}>
+            <div className="grid grid-cols-1 md:grid-cols-5 max-h-[90vh] overflow-y-auto">
               {/* Left Side - Image */}
-              <div className="relative h-64 md:h-auto overflow-hidden md:col-span-2">
+              <div className="relative h-48 sm:h-64 md:h-auto overflow-hidden md:col-span-2">
                 <img
                   src={
                     popupSubmitted
-                      ? "https://images.pexels.com/photos/2387624/pexels-photo-2387624.jpeg"
-                      : "https://images.pexels.com/photos/2387624/pexels-photo-2387624.jpeg"
+                      ? "/images/REALESTATEHEROSECTIONIMAGE.jpg"
+                      : "/images/REALESTATEHEROSECTIONIMAGE.jpg"
                   }
                   alt="Luxury Property"
                   className={`w-full h-full object-cover transition-all duration-700 ${
@@ -925,22 +907,21 @@ export default function App() {
 
               {/* Right Side - Scrollable Content */}
               <div
-                className={`p-8 md:p-10 flex flex-col transition-all duration-700 md:col-span-3 overflow-hidden bg-white`}
-                style={{ maxHeight: "600px" }}
+                className={`p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col transition-all duration-700 md:col-span-3 overflow-y-auto bg-white`}
               >
                 {!popupSubmitted ? (
                   <div className="animate-slideInRight">
-                    <h2 className="text-1xl md:text-2xl font-light mb-0 text-black tracking-wide">
+                    <h2 className="text-lg sm:text-xl md:text-2xl font-light mb-2 text-black tracking-wide">
                       NOT READY TO START YOUR SEARCH YET?
                     </h2>
-                    <p className="text-gray-700 mb-8 text-base leading-relaxed">
+                    <p className="text-gray-700 mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base leading-relaxed">
                       No worries! We can keep you up to date on the market and
                       add you to a curated Collection.
                     </p>
 
                     <form
                       onSubmit={handleFormSubmit}
-                      className="space-y-5 mb-6"
+                      className="space-y-3 sm:space-y-4 md:space-y-5 mb-4 sm:mb-6"
                     >
                       <div>
                         <label className="block text-xs text-black mb-2 tracking-wide font-medium">
@@ -952,7 +933,7 @@ export default function App() {
                           value={formData.name}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-white border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-black transition-all"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-black transition-all text-sm sm:text-base"
                           placeholder=""
                         />
                       </div>
@@ -967,7 +948,7 @@ export default function App() {
                           value={formData.phone}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-white border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-black transition-all"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-black transition-all text-sm sm:text-base"
                           placeholder=""
                         />
                       </div>
@@ -981,7 +962,7 @@ export default function App() {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-white border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-black transition-all"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-black transition-all text-sm sm:text-base"
                           placeholder=""
                         />
                       </div>
@@ -1013,17 +994,17 @@ export default function App() {
 
                       <button
                         type="submit"
-                        className="w-full py-4 bg-black text-white font-semibold tracking-widest hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg text-sm"
+                        className="w-full py-3 sm:py-4 bg-black text-white font-semibold tracking-widest hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg text-xs sm:text-sm"
                       >
                         SUBSCRIBE NOW
                       </button>
                     </form>
                   </div>
                 ) : (
-                  <div className="text-center animate-fadeInUp flex flex-col justify-center h-full">
-                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 animate-scaleIn">
+                  <div className="text-center animate-fadeInUp flex flex-col justify-center h-full py-8">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 animate-scaleIn">
                       <svg
-                        className="w-8 h-8 text-white"
+                        className="w-6 h-6 sm:w-8 sm:h-8 text-white"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -1036,16 +1017,16 @@ export default function App() {
                         />
                       </svg>
                     </div>
-                    <h2 className="text-3xl font-serif mb-4 text-black">
+                    <h2 className="text-2xl sm:text-3xl font-serif mb-3 sm:mb-4 text-black">
                       Thank You!
                     </h2>
-                    <p className="text-gray-600 mb-6">
+                    <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 px-4">
                       We've received your information and will be in touch
                       shortly with exclusive property updates.
                     </p>
                     <button
                       onClick={() => setShowPopup(false)}
-                      className="px-8 py-3 bg-black text-white hover:bg-gray-800 transition-colors font-medium mx-auto"
+                      className="px-6 sm:px-8 py-2 sm:py-3 bg-black text-white hover:bg-gray-800 transition-colors font-medium mx-auto text-sm sm:text-base"
                     >
                       Continue Exploring
                     </button>

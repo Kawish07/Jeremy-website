@@ -6,9 +6,7 @@ import ContactModal from './components/ContactModal';
 import { Instagram, Facebook } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { getDummyListing } from './data/dummyListings';
-import { resolveImage, ensureProtocol, placeholderDataUrl } from './lib/image';
-
-const API = import.meta.env.VITE_API_URL;
+import { resolveImage, ensureProtocol, placeholderDataUrl, API } from './lib/image';
 
 export default function ListingDetail() {
   const { id } = useParams();

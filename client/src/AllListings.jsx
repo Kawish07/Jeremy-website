@@ -5,9 +5,7 @@ import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import { getDummyListings } from './data/dummyListings';
 import { useEffect, useRef } from 'react';
-import { resolveImage, ensureProtocol, placeholderDataUrl } from './lib/image';
-
-const API = import.meta.env.VITE_API_URL;
+import { resolveImage, ensureProtocol, placeholderDataUrl, API } from './lib/image';
 export default function AllListings({ onBack }) {
     const [filterStatus, setFilterStatus] = useState('all');
     

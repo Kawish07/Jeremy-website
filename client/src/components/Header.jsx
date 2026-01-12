@@ -19,7 +19,9 @@ export default function Header({ onBack, light = false }) {
     const navigate = useNavigate();
     const location = useLocation();
     const isAllListings = location && location.pathname === '/all-listings';
+    // when header sits on a dark/black background (all listings) or when the split black bg is visible after scrolling, invert the logo to white
     const useWhite = isAllListings;
+    const logoOnDarkBg = useWhite || !atTop;
     const rightLinkClass = useWhite ? 'text-white font-semibold text-base md:text-lg hover:opacity-80 transition-opacity' : 'text-black font-semibold text-base md:text-lg hover:opacity-70 transition-opacity';
     // icon: white on small screens only, black on sm+ (medium and large)
     const rightIconClass = useWhite ? 'w-5 h-5 text-white' : 'w-5 h-5 text-white sm:text-black';
@@ -48,6 +50,8 @@ export default function Header({ onBack, light = false }) {
             .animate-scaleIn { animation: scaleIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
             .animate-pulse-slow { animation: pulse 2s ease-in-out infinite; }
             .animate-ripple { animation: ripple 1.5s ease-out infinite; }
+            .scrollbar-hide::-webkit-scrollbar { display: none; }
+            .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         `;
         document.head.appendChild(style);
         return () => document.head.removeChild(style);
@@ -155,9 +159,10 @@ export default function Header({ onBack, light = false }) {
                     <div className="flex items-center">
                         <Link to="/">
                             <img
-                                src="https://cdn-cws.datafloat.com/AGY/images/company/AGY/agency-logo.svg?mw=160&mh=160"
-                                alt="Agency logo"
+                                src="/images/Concepcion_logo-removebg-preview.png"
+                                alt="Concepcion Pena Logo"
                                 className="h-24 md:h-28 max-w-[220px] md:max-w-[260px] w-auto object-contain"
+                                style={{ filter: logoOnDarkBg ? 'brightness(0) invert(1)' : 'none', transition: 'filter 200ms ease' }}
                             />
                         </Link>
                     </div>
@@ -205,41 +210,36 @@ export default function Header({ onBack, light = false }) {
             </header>
 
             {/* Slide Menu */}
-            <div className={`fixed top-0 right-0 h-full w-96 z-50 transform transition-all duration-500 ease-out ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`} aria-hidden={!menuOpen}>
-                {/* Gradient Background with Pattern */}
-                <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black pointer-events-auto">
-                    {/* Animated Grid Pattern */}
-                    <div className="absolute inset-0 opacity-10">
-                        <div className="absolute inset-0" style={{
-                            backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-                                 linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
-                            backgroundSize: '50px 50px'
-                        }} />
-                    </div>
-
-                    {/* Glowing Orb Effects */}
-                    <div className="absolute top-20 right-10 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-                    <div className="absolute bottom-20 left-10 w-48 h-48 bg-white/3 rounded-full blur-3xl" />
+            <div className={`fixed top-0 right-0 h-screen w-96 z-50 transform transition-all duration-500 ease-out ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`} aria-hidden={!menuOpen}>
+                {/* Premium Background with Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-950 to-black pointer-events-auto">
+                    {/* Subtle Accent Line */}
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-yellow-400 via-yellow-500 to-transparent opacity-30" />
+                    
+                    {/* Soft Glowing Orbs */}
+                    <div className="absolute top-1/4 -right-32 w-80 h-80 bg-yellow-500/5 rounded-full blur-3xl pointer-events-none" />
+                    <div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-white/3 rounded-full blur-3xl pointer-events-none" />
                 </div>
 
                 <div className="relative h-full p-8 flex flex-col">
-                    {/* Close Button */}
+                    {/* Close Button - Enhanced */}
                     <button
                         onClick={() => setMenuOpen(false)}
                         aria-label="Close menu"
-                        className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all duration-300 group"
+                        className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full border border-yellow-400/30 hover:border-yellow-400/60 hover:bg-yellow-400/10 transition-all duration-300 group"
                     >
-                        <X className="w-5 h-5 text-white/70 group-hover:text-white transition-colors group-hover:rotate-90 duration-300" />
+                        <X className="w-5 h-5 text-white/70 group-hover:text-yellow-400 transition-colors group-hover:rotate-90 duration-500" />
                     </button>
 
-                    {/* Decorative Line */}
-                    <div className="mt-8 mb-12">
-                        <div className="h-px w-16 bg-gradient-to-r from-white/40 to-transparent" />
+                    {/* Brand Section */}
+                    <div className="mt-8 mb-16">
+                        <div className="h-1 w-12 bg-gradient-to-r from-yellow-400 to-transparent rounded-full mb-2" />
+                        <p className="text-xs tracking-[0.2em] text-white/40 uppercase font-light">Menu</p>
                     </div>
 
-                    <nav className="flex-1">
+                    {/* Scrollable Nav Section */}
+                    <nav className="flex-1 overflow-y-auto space-y-2 pr-2 scrollbar-hide">
                         {[
-                            { href: '#hero', label: 'Home', icon: '01' },
                             { href: '#contact', label: 'Contact', icon: '02' },
                             { href: '/all-listings', label: 'Portfolio', icon: '03' },
                             { href: '/testimonials', label: 'Testimonials', icon: '04' },
@@ -248,43 +248,44 @@ export default function Header({ onBack, light = false }) {
                             <button
                                 key={item.href + idx}
                                 onClick={() => handleNav(item)}
-                                className={`group block w-full text-left transform transition-all duration-500 ${menuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
-                                style={{ transitionDelay: `${idx * 80 + 100}ms` }}
+                                className={`group block w-full text-left transform transition-all duration-700 will-change-transform ${menuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
+                                style={{ transitionDelay: `${idx * 60 + 120}ms` }}
                             >
-                                <div className="relative overflow-hidden mb-6">
-                                    {/* Hover Background */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                <div className="relative overflow-hidden rounded-lg">
+                                    {/* Hover Background - Yellow Accent */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/0 via-yellow-400/5 to-yellow-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                    
+                                    {/* Animated Bottom Border */}
+                                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center" />
 
-                                    <div className="relative px-4 py-4 flex items-center justify-between">
-                                        {/* Number Badge and Label */}
+                                    <div className="relative px-6 py-4 flex items-center justify-between">
+                                        {/* Number Badge */}
                                         <div className="flex items-center space-x-4">
-                                            <span className="text-xs font-mono text-white/30 group-hover:text-white/50 transition-colors duration-300">
+                                            <span className="text-xs font-mono text-white/25 group-hover:text-yellow-400/70 transition-all duration-500">
                                                 {item.icon}
                                             </span>
-                                            <span className="text-lg font-light tracking-wide text-white/90 group-hover:text-white transition-all duration-300 group-hover:translate-x-1">
+                                            <span className="text-base font-light tracking-wide text-white/80 group-hover:text-white transition-all duration-500 group-hover:translate-x-1">
                                                 {item.label}
                                             </span>
                                         </div>
 
                                         {/* Arrow Icon */}
-                                        <span className="text-white/0 group-hover:text-white/70 transform -translate-x-4 group-hover:translate-x-0 transition-all duration-300">→</span>
+                                        <span className="text-white/20 group-hover:text-yellow-400 transform transition-all duration-500 group-hover:translate-x-1">→</span>
                                     </div>
-
-                                    {/* Bottom Border */}
-                                    <div className="absolute bottom-0 left-4 right-4 h-px bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                                 </div>
                             </button>
                         ))}
-                        {/* Admin Login Button */}
-                    <div className="mt-6 mb-6">
+                    </nav>
+
+                    {/* Admin Login Button - Fixed at Bottom */}
+                    <div className="flex-shrink-0 space-y-3 pt-6 border-t border-white/10">
                         <button
                             onClick={() => { setMenuOpen(false); navigate('/admin/login'); }}
-                            className="w-full inline-flex items-center justify-center px-4 py-3 bg-white text-black rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                            className="w-full px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-semibold rounded-lg hover:shadow-lg hover:shadow-yellow-400/30 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1"
                         >
                             Admin Login
                         </button>
                     </div>
-                    </nav>
                 </div>
             </div>
 
