@@ -5,7 +5,7 @@ export default function PageLoader({ open = false }) {
   if (!open) return null;
 
   const loader = (
-    <div className="page-loader-overlay fixed inset-0 z-[99999] flex items-center justify-center bg-black" aria-hidden="true">
+    <div className="page-loader-overlay fixed inset-0 z-[99999] flex items-center justify-center bg-gradient-to-br from-[#0f1f2e] via-[#132a3c] to-[#1c3b57]" aria-hidden="true">
       <div className="loader-inner text-center">
         {/* 3D Rotating Cube Loader */}
         <div className="loader-3d mb-8" aria-hidden="true">
@@ -31,17 +31,17 @@ export default function PageLoader({ open = false }) {
           <div className="glow-orb"></div>
         </div>
 
-        <div className="loader-text text-white">
-          <h1 className="text-3xl md:text-4xl font-serif mb-3 text-white font-bold">
+        <div className="loader-text text-[#f7f1e5]">
+          <h1 className="text-3xl md:text-4xl font-serif mb-3 text-[#f7f1e5] font-bold">
             Jeremy Denham
           </h1>
-          <p className="text-sm md:text-base text-white/70 tracking-wide">
+          <p className="text-sm md:text-base text-[#e5d8c4] tracking-wide">
             Bringing you market insights — loading…
           </p>
           
           {/* Progress bar */}
-          <div className="progress-bar-container mt-6 w-64 mx-auto h-1 bg-white/10 rounded-full overflow-hidden">
-            <div className="progress-bar h-full bg-white rounded-full"></div>
+          <div className="progress-bar-container mt-6 w-64 mx-auto h-1 bg-[#d8a24a]/20 rounded-full overflow-hidden">
+            <div className="progress-bar h-full bg-[#d8a24a] rounded-full"></div>
           </div>
         </div>
       </div>
@@ -78,12 +78,12 @@ export default function PageLoader({ open = false }) {
           position: absolute;
           width: 80px;
           height: 80px;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.25));
-          border: 2px solid rgba(255, 255, 255, 0.5);
+          background: linear-gradient(135deg, rgba(216, 162, 74, 0.25), rgba(245, 193, 92, 0.35));
+          border: 2px solid rgba(216, 162, 74, 0.5);
           backdrop-filter: blur(10px);
           box-shadow: 
-            0 0 20px rgba(255, 255, 255, 0.3),
-            inset 0 0 20px rgba(255, 255, 255, 0.1);
+            0 0 20px rgba(216, 162, 74, 0.35),
+            inset 0 0 18px rgba(245, 193, 92, 0.18);
         }
 
         .cube-front  { transform: rotateY(0deg) translateZ(40px); }
@@ -120,8 +120,8 @@ export default function PageLoader({ open = false }) {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: white;
-          box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+          background: #d8a24a;
+          box-shadow: 0 0 10px rgba(216, 162, 74, 0.9);
           top: 50%;
           left: 50%;
         }
@@ -182,7 +182,7 @@ export default function PageLoader({ open = false }) {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(216, 162, 74, 0.25) 0%, transparent 70%);
           animation: pulseGlow 2s ease-in-out infinite;
           pointer-events: none;
         }
