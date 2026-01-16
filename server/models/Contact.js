@@ -8,4 +8,8 @@ const ContactSchema = new mongoose.Schema({
   consent: { type: Boolean, default: false }
 }, { timestamps: true });
 
+// Add indexes for faster queries
+ContactSchema.index({ email: 1 });
+ContactSchema.index({ createdAt: -1 });
+
 module.exports = mongoose.models.Contact || mongoose.model('Contact', ContactSchema);

@@ -27,6 +27,17 @@ const app = express();
 // ===== TRUST PROXY (NGINX / VPS) =====
 app.set('trust proxy', 1);
 
+// ===== ENFORCE HTTPS IN PRODUCTION =====
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+      res.redirect(`https://${req.header('host')}${req.originalUrl}`);
+    } else {
+      next();
+    }
+  });
+}
+
 // ===== SECURITY HEADERS =====
 app.use(helmet({
   contentSecurityPolicy: {
