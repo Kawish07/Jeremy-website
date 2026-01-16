@@ -601,15 +601,15 @@ export default function App() {
             />
 
             <div
-              className={`fixed left-4 right-4 bottom-20 sm:left-8 sm:right-auto sm:bottom-24 w-auto sm:w-[320px] md:w-[420px] max-w-[95vw] bg-[#0b0b0b] text-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 z-[110003] max-h-[85vh] overflow-y-auto ${
+              className={`fixed left-4 right-4 bottom-20 sm:left-8 sm:right-auto sm:bottom-24 w-auto sm:w-[320px] md:w-[420px] max-w-[95vw] bg-gradient-to-b from-[#0f1f2e] to-[#1c3b57] text-[#f7f1e5] rounded-2xl shadow-[0_20px_50px_rgba(15,31,46,0.4)] overflow-hidden transform transition-all duration-300 z-[110003] border border-[#d8a24a]/20 ${
                 leftAnimating
                   ? "translate-y-0 opacity-100"
                   : "translate-y-6 opacity-0"
               }`}
             >
               <div className="flex items-start justify-between px-4 sm:px-6 pt-4 sm:pt-6">
-                <h3 className="text-xl sm:text-2xl font-serif">
-                  Leave a Message
+                <h3 className="text-xl sm:text-2xl font-serif text-[#f7f1e5]">
+                  Let's Connect
                 </h3>
                 <button
                   onClick={() => {
@@ -619,9 +619,9 @@ export default function App() {
                       setLeftSubmitted(false);
                     }, 300);
                   }}
-                  className="bg-white bg-opacity-5 p-1 rounded hover:bg-opacity-10 transition"
+                  className="bg-white/10 hover:bg-white/20 p-1 rounded transition"
                 >
-                  <X className="w-5 h-5 text-white" />
+                  <X className="w-5 h-5 text-[#f7f1e5]" />
                 </button>
               </div>
 
@@ -632,56 +632,68 @@ export default function App() {
                     className="space-y-3 sm:space-y-4"
                   >
                     <div>
+                      <label className="block text-xs text-[#d8a24a] mb-2 tracking-wide font-medium">
+                        Full Name *
+                      </label>
                       <input
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        placeholder="Full Name"
-                        className="w-full px-3 py-2 sm:py-3 bg-transparent border border-gray-600 rounded text-white text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
+                        placeholder=""
+                        className="w-full px-3 py-2 sm:py-3 bg-white/5 border border-[#d8a24a]/40 rounded text-[#f7f1e5] text-sm sm:text-base placeholder-[#9c8a6b] focus:outline-none focus:border-[#d8a24a] focus:ring-2 focus:ring-[#d8a24a]/30 transition-colors duration-200 hover:border-[#d8a24a]/60"
                       />
                     </div>
                     <div>
+                      <label className="block text-xs text-[#d8a24a] mb-2 tracking-wide font-medium">
+                        Email *
+                      </label>
                       <input
                         name="email"
                         type="email"
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        placeholder="Email"
-                        className="w-full px-3 py-2 sm:py-3 bg-transparent border border-gray-600 rounded text-white text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
+                        placeholder=""
+                        className="w-full px-3 py-2 sm:py-3 bg-white/5 border border-[#d8a24a]/40 rounded text-[#f7f1e5] text-sm sm:text-base placeholder-[#9c8a6b] focus:outline-none focus:border-[#d8a24a] focus:ring-2 focus:ring-[#d8a24a]/30 transition-colors duration-200 hover:border-[#d8a24a]/60"
                       />
                     </div>
                     <div>
+                      <label className="block text-xs text-[#d8a24a] mb-2 tracking-wide font-medium">
+                        Phone *
+                      </label>
                       <input
                         name="phone"
                         type="tel"
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        placeholder="Phone"
-                        className="w-full px-3 py-2 sm:py-3 bg-transparent border border-gray-600 rounded text-white text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
+                        placeholder=""
+                        className="w-full px-3 py-2 sm:py-3 bg-white/5 border border-[#d8a24a]/40 rounded text-[#f7f1e5] text-sm sm:text-base placeholder-[#9c8a6b] focus:outline-none focus:border-[#d8a24a] focus:ring-2 focus:ring-[#d8a24a]/30 transition-colors duration-200 hover:border-[#d8a24a]/60"
                       />
                     </div>
                     <div className="relative">
+                      <label className="block text-xs text-[#d8a24a] mb-2 tracking-wide font-medium">
+                        Interested in... *
+                      </label>
                       <select
                         name="interest"
                         value={formData.interest}
                         onChange={handleInputChange}
                         required
-                        className="appearance-none w-full px-3 py-2 sm:py-3 bg-transparent border border-gray-600 rounded text-white text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
+                        className="appearance-none w-full px-3 py-2 sm:py-3 bg-white/5 border border-[#d8a24a]/40 rounded text-[#f7f1e5] text-sm sm:text-base placeholder-[#9c8a6b] focus:outline-none focus:border-[#d8a24a] focus:ring-2 focus:ring-[#d8a24a]/30 transition-colors duration-200 hover:border-[#d8a24a]/60"
                       >
-                        <option value="" disabled>
-                          Interested in...
+                        <option value="" disabled className="bg-[#0f1f2e]">
+                          Select an option
                         </option>
-                        <option value="buying">Buying</option>
-                        <option value="selling">Selling</option>
-                        <option value="renting">Renting</option>
-                        <option value="other">Other</option>
+                        <option value="buying" className="bg-[#0f1f2e]">Buying</option>
+                        <option value="selling" className="bg-[#0f1f2e]">Selling</option>
+                        <option value="renting" className="bg-[#0f1f2e]">Renting</option>
+                        <option value="other" className="bg-[#0f1f2e]">Other</option>
                       </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                      <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center mt-6">
                         <svg
-                          className="w-4 h-4 text-gray-400"
+                          className="w-4 h-4 text-[#d8a24a]"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -696,8 +708,8 @@ export default function App() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs text-white mb-2">
-                        Best time to get in touch (Eastern Time Zone)
+                      <label className="block text-xs text-[#d8a24a] mb-2 tracking-wide font-medium">
+                        Best time to connect (ET) *
                       </label>
                       <input
                         name="bestTime"
@@ -705,12 +717,12 @@ export default function App() {
                         value={formData.bestTime}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 sm:py-3 bg-transparent border border-gray-600 rounded text-white text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/10 transition-colors duration-200 hover:border-white"
+                        className="w-full px-3 py-2 sm:py-3 bg-white/5 border border-[#d8a24a]/40 rounded text-[#f7f1e5] text-sm sm:text-base placeholder-[#9c8a6b] focus:outline-none focus:border-[#d8a24a] focus:ring-2 focus:ring-[#d8a24a]/30 transition-colors duration-200 hover:border-[#d8a24a]/60"
                       />
                     </div>
 
                     {leftError && (
-                      <p className="text-red-400 text-sm">{leftError}</p>
+                      <p className="text-[#f5a962] text-sm">{leftError}</p>
                     )}
 
                     <div className="flex items-start space-x-3">
@@ -718,17 +730,16 @@ export default function App() {
                         id="left-consent"
                         required
                         type="checkbox"
-                        className="w-4 h-4 mt-1 accent-white bg-transparent"
+                        className="w-4 h-4 mt-1 accent-[#d8a24a] bg-white/5 border border-[#d8a24a]/40"
                       />
                       <label
                         htmlFor="left-consent"
-                        className="text-xs text-white leading-relaxed"
+                        className="text-xs text-[#e8dfcf] leading-relaxed"
                       >
-                        By providing your contact information, you agree to our{" "}
-                        <a href="#" className="underline">
+                        I agree to receive marketing communications and acknowledge the{" "}
+                        <a href="#" className="text-[#d8a24a] underline hover:text-[#f5c15c]">
                           Privacy Policy
-                        </a>{" "}
-                        and consent to receiving marketing communications.
+                        </a>
                       </label>
                     </div>
 
@@ -736,7 +747,7 @@ export default function App() {
                       <button
                         type="submit"
                         disabled={leftLoading}
-                        className="w-full bg-white text-black py-2 sm:py-3 rounded font-semibold text-sm sm:text-base hover:bg-gray-100 hover:shadow-xl transform transition-all duration-200 disabled:opacity-50"
+                        className="w-full bg-[#d8a24a] text-[#0f1f2e] py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base hover:bg-[#f5c15c] transition-all duration-200 transform hover:shadow-lg disabled:opacity-50 shadow-[0_12px_30px_rgba(216,162,74,0.3)]"
                       >
                         {leftLoading ? "SENDING..." : "Submit"}
                       </button>
@@ -744,9 +755,9 @@ export default function App() {
                   </form>
                 ) : (
                   <div className="text-center py-8">
-                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-12 h-12 bg-[#d8a24a] rounded-full flex items-center justify-center mx-auto mb-4">
                       <svg
-                        className="w-6 h-6 text-white"
+                        className="w-6 h-6 text-[#0f1f2e]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -759,7 +770,7 @@ export default function App() {
                         />
                       </svg>
                     </div>
-                    <p className="mb-4">Thanks — we'll be in touch shortly.</p>
+                    <p className="text-[#f7f1e5] mb-4 text-sm sm:text-base">Thanks — we'll be in touch shortly.</p>
                     <button
                       onClick={() => {
                         setLeftAnimating(false);
@@ -768,7 +779,7 @@ export default function App() {
                           setLeftSubmitted(false);
                         }, 300);
                       }}
-                      className="px-6 py-2 border rounded hover:bg-white hover:text-black transition"
+                      className="px-6 py-2 border border-[#d8a24a] text-[#d8a24a] rounded-full hover:bg-[#d8a24a] hover:text-[#0f1f2e] transition-all duration-200"
                     >
                       Close
                     </button>
