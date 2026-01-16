@@ -327,7 +327,7 @@ export default function App() {
         <div className="grid md:grid-cols-2 h-[90vh]">
           <div className="relative h-full overflow-hidden">
             <img
-              src="images/jemey1.jpg"
+              src="images/jemey7 enhanced.jpg"
               alt="Jeremy Denham"
               className="hero-image w-full h-full object-cover object-center transform translate-y-8"
             />
@@ -565,9 +565,8 @@ export default function App() {
           </div>
           <div className="relative w-full flex justify-center md:justify-end">
             <div className="relative w-10/12 md:w-9/12 lg:w-8/12 max-w-md">
-              <div className="absolute -inset-4 rounded-3xl bg-[#d8a24a] opacity-30 blur-xl" aria-hidden="true" />
               <img
-                src="/images/jemey2.jpg"
+                src="/images/jemey2 enhanced.jpg"
                 alt="Jeremy Denham"
                 className="w-full h-auto object-cover rounded-3xl border border-[#e5d8c4] shadow-[0_18px_45px_rgba(15,31,46,0.12)] hover:shadow-[0_26px_60px_rgba(15,31,46,0.18)] transition-shadow duration-300"
               />

@@ -14,7 +14,7 @@ export default function Testimonials() {
           className="h-[90vh] md:h-[100vh] bg-cover bg-center relative"
           style={{
             backgroundImage:
-              "url('/images/jemey4.jpg')",
+              "url('/images/jemey7.png')",
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-[#0f1f2e]/75 via-[#0f1f2e]/55 to-transparent" />
@@ -67,10 +67,11 @@ export default function Testimonials() {
       {/* Image CTA section with overlay */}
       <section className="relative h-[60vh] md:h-[70vh] w-full">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmVhbCUyMGVzdGF0ZXxlbnwwfHwwfHx8MA%3D%3D')",
+              "url('/images/jemey2 enhanced.jpg')",
+            backgroundPosition: "center 15%",
           }}
         />
         {/* dark overlay to improve white text contrast */}

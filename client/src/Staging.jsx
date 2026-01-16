@@ -125,7 +125,7 @@ export default function Staging() {
             <div
               className="h-full bg-cover bg-center"
               style={{
-                backgroundImage: `url('/images/jemey3.jpg')`,
+                backgroundImage: `url('/images/jemey3 enhanced.jpg')`,
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0f1f2e]/75 via-[#0f1f2e]/55 to-transparent" />
