@@ -36,7 +36,7 @@ const Sidebar = ({ stats, admin, isOpen, onClose }) => {
       )}
       
       {/* Sidebar */}
-      <div className={`fixed lg:static inset-y-0 left-0 w-64 bg-gradient-to-b from-gray-900 to-black text-white min-h-screen shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+      <div className={`fixed lg:static inset-y-0 left-0 w-64 bg-gradient-to-b from-[#0f1f2e] via-[#132a3c] to-[#1c3b57] text-[#f7f1e5] min-h-screen shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
       }`}>
         {/* Mobile Close Button */}
@@ -50,37 +50,37 @@ const Sidebar = ({ stats, admin, isOpen, onClose }) => {
         </button>
 
         {/* Logo */}
-        <div className="p-6 border-b border-gray-800">
+        <div className="p-6 border-b border-[#1f3a52]">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gradient-to-r from-white to-gray-300 rounded-xl flex items-center justify-center">
-            <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-10 h-10 bg-gradient-to-r from-[#d8a24a] to-[#f5c15c] rounded-xl flex items-center justify-center shadow-md">
+            <svg className="w-6 h-6 text-[#0f1f2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
           </div>
           <div>
             <h1 className="text-xl font-bold">{admin && admin.name ? admin.name : 'PropertyPro'}</h1>
-            <p className="text-xs text-gray-400">Admin Panel</p>
+            <p className="text-xs text-[#d8d2c7]">Admin Panel</p>
           </div>
         </div>
       </div>
 
       {/* Stats Summary */}
-      <div className="p-6 border-b border-gray-800">
+      <div className="p-6 border-b border-[#1f3a52]">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-400">Total Properties</span>
+            <span className="text-sm text-[#d8d2c7]">Total Properties</span>
             <span className="text-lg font-bold">{stats.total}</span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-400">Active</span>
-            <span className="text-lg font-bold text-green-400">{stats.active}</span>
+            <span className="text-sm text-[#d8d2c7]">Active</span>
+            <span className="text-lg font-bold text-[#f5c15c]">{stats.active}</span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-400">Sold</span>
-            <span className="text-lg font-bold text-blue-400">{stats.sold}</span>
+            <span className="text-sm text-[#d8d2c7]">Sold</span>
+            <span className="text-lg font-bold text-[#9fd3ff]">{stats.sold}</span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-400">Conversion Rate</span>
+            <span className="text-sm text-[#d8d2c7]">Conversion Rate</span>
             <span className="text-lg font-bold">
               {stats.total > 0 ? ((stats.sold / stats.total) * 100).toFixed(1) : '0'}%
             </span>
@@ -101,12 +101,12 @@ const Sidebar = ({ stats, admin, isOpen, onClose }) => {
                   onClick={() => navigate(item.path)}
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ${
                     isActive 
-                      ? 'bg-gradient-to-r from-white/10 to-white/5 border border-white/20' 
+                      ? 'bg-[#d8a24a] text-[#0f1f2e] shadow-lg border border-[#f5c15c]' 
                       : 'hover:bg-white/5'
                   }`}
                 >
-                  <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-gray-400'}`} />
-                  <span className={isActive ? 'font-semibold' : 'text-gray-300'}>{item.label}</span>
+                  <Icon className={`w-5 h-5 ${isActive ? 'text-[#0f1f2e]' : 'text-[#d8d2c7]'}`} />
+                  <span className={isActive ? 'font-semibold text-[#0f1f2e]' : 'text-[#e8dfcf]'}>{item.label}</span>
                 </button>
               </li>
             );
@@ -115,21 +115,21 @@ const Sidebar = ({ stats, admin, isOpen, onClose }) => {
       </nav>
 
       {/* Profile & Logout */}
-      <div className="p-6 border-t border-gray-800 mt-4">
+      <div className="p-6 border-t border-[#1f3a52] mt-4">
         <div className="flex items-center space-x-3 mb-4">
-          <div className="w-10 h-10 bg-gradient-to-r from-gray-700 to-gray-900 rounded-full flex items-center justify-center">
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-10 h-10 bg-gradient-to-r from-[#d8a24a] to-[#f5c15c] rounded-full flex items-center justify-center shadow-md">
+            <svg className="w-5 h-5 text-[#0f1f2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </div>
           <div>
             <h4 className="text-sm font-semibold">{admin && admin.name ? admin.name : 'Admin User'}</h4>
-            <p className="text-xs text-gray-400">{admin && admin.email ? admin.email : 'Administrator'}</p>
+            <p className="text-xs text-[#d8d2c7]">{admin && admin.email ? admin.email : 'Administrator'}</p>
           </div>
         </div>
         <button
           onClick={handleLogout}
-          className="w-full mt-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold transition-all duration-200"
+          className="w-full mt-2 px-4 py-2 bg-[#d9534f] hover:bg-[#c64540] text-white rounded-xl font-semibold transition-all duration-200"
         >
           Logout
         </button>

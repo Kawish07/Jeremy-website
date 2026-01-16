@@ -16,7 +16,7 @@ export default function FloatingCTA({ onClick }) {
             <button
                 onClick={handleClick}
                 aria-label="Lets connect"
-                className="bg-white px-6 py-3 rounded-full shadow-lg text-sm tracking-wide hover:shadow-xl transition-shadow flex items-center space-x-2 border border-gray-200"
+                className="bg-[#d8a24a] px-6 py-3 rounded-full shadow-[0_12px_30px_rgba(216,162,74,0.3)] text-sm tracking-wide hover:bg-[#f5c15c] transition-all duration-200 flex items-center space-x-2 border-2 border-[#d8a24a] text-[#0f1f2e] font-semibold"
             >
                 <span>LET'S CONNECT</span>
                 <span className="text-xs">↑</span>

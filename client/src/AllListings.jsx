@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Linkedin, MapPin, Bed, Bath, Maximize } from 'lucide-react';
+import { MapPin, Bed, Bath, Maximize } from 'lucide-react';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import { useEffect, useRef } from 'react';
@@ -8,8 +8,8 @@ import { resolveImage, ensureProtocol, placeholderDataUrl, API } from './lib/ima
 
 // Helper function to format numbers with commas
 const formatPrice = (price) => {
-  if (!price) return '0';
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    if (!price) return '0';
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 export default function AllListings({ onBack }) {
     const [filterStatus, setFilterStatus] = useState('all');
@@ -43,18 +43,18 @@ export default function AllListings({ onBack }) {
     const getStatusBadge = (status) => {
         switch(status) {
             case 'under-contract':
-                return { text: 'UNDER CONTRACT', color: 'bg-black' };
+                return { text: 'UNDER CONTRACT', color: '#d8a24a' };
             case 'sold':
-                return { text: 'SOLD', color: 'bg-gray-800' };
+                return { text: 'SOLD', color: '#1c3b57' };
             case 'active':
-                return { text: 'ACTIVE', color: 'bg-green-600' };
+                return { text: 'ACTIVE', color: '#0f1f2e' };
             default:
-                return { text: 'ACTIVE', color: 'bg-green-600' };
+                return { text: 'ACTIVE', color: '#0f1f2e' };
         }
     };
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[#f7f1e5]">
             <Header onBack={onBack} light={true} />
 
             {/* Hero Section with Background Image */}
@@ -65,22 +65,22 @@ export default function AllListings({ onBack }) {
                         backgroundImage: "url('https://images.pexels.com/photos/3288100/pexels-photo-3288100.png')"
                     }}
                 >
-                    <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#0f1f2e]/80 via-[#0f1f2e]/60 to-transparent" />
                 </div>
                 
-                <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-6">
+                <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-[#f7f1e5] px-6">
                     <div className="max-w-4xl">
-                        <p className="text-sm tracking-[0.3em] mb-4 uppercase font-light">Exclusive Properties</p>
-                        <h1 className="text-5xl md:text-7xl font-serif mb-6 leading-tight">
+                        <p className="text-sm tracking-[0.3em] mb-4 uppercase font-light text-[#f5c15c]">Exclusive Properties</p>
+                        <h1 className="text-5xl md:text-7xl font-serif mb-6 leading-tight drop-shadow-[0_6px_18px_rgba(0,0,0,0.35)]">
                             Our Premium
                             <br />
                             <span className="relative inline-block mt-2">
                                 Listings
-                                <span className="absolute bottom-2 left-0 w-full h-4 bg-yellow-400 opacity-40 -z-10"></span>
+                                <span className="absolute bottom-2 left-0 w-full h-4 bg-[#d8a24a] opacity-70 -z-10"></span>
                             </span>
                         </h1>
-                        <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed opacity-90">
-                            Browse our curated collection of luxury properties or contact us to schedule a private showing
+                        <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed text-[#f7f1e5] opacity-95">
+                            Browse curated luxury properties across Texas and beyond. Schedule a private tour with a single click.
                         </p>
                     </div>
                 </div>
@@ -94,49 +94,49 @@ export default function AllListings({ onBack }) {
             </section>
 
             {/* Filter Section */}
-            <section className="bg-gray-50 py-8 px-6 border-b border-gray-200">
+            <section className="bg-[#efe5d5] py-8 px-6 border-b border-[#d8a24a]/60">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
                     <div>
-                        <h2 className="text-2xl font-serif text-gray-900">All Properties</h2>
-                        <p className="text-sm text-gray-600 mt-1">{filteredListings.length} {filteredListings.length === 1 ? 'Property' : 'Properties'} Available</p>
+                        <h2 className="text-2xl font-serif text-[#0f1f2e]">All Properties</h2>
+                        <p className="text-sm text-[#2f3d4c] mt-1">{filteredListings.length} {filteredListings.length === 1 ? 'Property' : 'Properties'} Available</p>
                     </div>
                     <div className="flex gap-3">
                         <button
                             onClick={() => setFilterStatus('all')}
-                            className={`px-6 py-2 text-sm tracking-wide transition-all ${
+                            className={`px-6 py-2 text-sm tracking-wide rounded-full transition-all shadow-sm ${
                                 filterStatus === 'all' 
-                                    ? 'bg-black text-white' 
-                                    : 'bg-white text-gray-700 border border-gray-300 hover:border-black'
+                                    ? 'bg-[#0f1f2e] text-[#f7f1e5] border border-[#0f1f2e]' 
+                                    : 'bg-[#f7f1e5] text-[#0f1f2e] border border-[#d8a24a] hover:border-[#0f1f2e]'
                             }`}
                         >
                             All
                         </button>
                         <button
                             onClick={() => setFilterStatus('active')}
-                            className={`px-6 py-2 text-sm tracking-wide transition-all ${
+                            className={`px-6 py-2 text-sm tracking-wide rounded-full transition-all shadow-sm ${
                                 filterStatus === 'active' 
-                                    ? 'bg-black text-white' 
-                                    : 'bg-white text-gray-700 border border-gray-300 hover:border-black'
+                                    ? 'bg-[#0f1f2e] text-[#f7f1e5] border border-[#0f1f2e]' 
+                                    : 'bg-[#f7f1e5] text-[#0f1f2e] border border-[#d8a24a] hover:border-[#0f1f2e]'
                             }`}
                         >
                             Active
                         </button>
                         <button
                             onClick={() => setFilterStatus('under-contract')}
-                            className={`px-6 py-2 text-sm tracking-wide transition-all ${
+                            className={`px-6 py-2 text-sm tracking-wide rounded-full transition-all shadow-sm ${
                                 filterStatus === 'under-contract' 
-                                    ? 'bg-black text-white' 
-                                    : 'bg-white text-gray-700 border border-gray-300 hover:border-black'
+                                    ? 'bg-[#0f1f2e] text-[#f7f1e5] border border-[#0f1f2e]' 
+                                    : 'bg-[#f7f1e5] text-[#0f1f2e] border border-[#d8a24a] hover:border-[#0f1f2e]'
                             }`}
                         >
                             Under Contract
                         </button>
                         <button
                             onClick={() => setFilterStatus('sold')}
-                            className={`px-6 py-2 text-sm tracking-wide transition-all ${
+                            className={`px-6 py-2 text-sm tracking-wide rounded-full transition-all shadow-sm ${
                                 filterStatus === 'sold' 
-                                    ? 'bg-black text-white' 
-                                    : 'bg-white text-gray-700 border border-gray-300 hover:border-black'
+                                    ? 'bg-[#0f1f2e] text-[#f7f1e5] border border-[#0f1f2e]' 
+                                    : 'bg-[#f7f1e5] text-[#0f1f2e] border border-[#d8a24a] hover:border-[#0f1f2e]'
                             }`}
                         >
                             Sold
@@ -155,7 +155,7 @@ export default function AllListings({ onBack }) {
                             console.warn('Listing missing image, using placeholder:', idValue);
                         }
                         return (
-                            <article key={idValue} className="bg-white group overflow-hidden" style={{ transform: 'translateZ(0)' }}>
+                            <article key={idValue} className="bg-white/90 group overflow-hidden rounded-2xl shadow-[0_18px_45px_rgba(15,31,46,0.08)] border border-[#e5d8c4]" style={{ transform: 'translateZ(0)' }}>
                                 <Link to={idValue ? `/listing/${idValue}` : '#'} className="block">
                                     <div className="relative overflow-hidden h-80" style={{ transform: 'translateZ(0)' }}>
                                         <img
@@ -168,29 +168,32 @@ export default function AllListings({ onBack }) {
                                             style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
                                             onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = placeholderDataUrl(); }}
                                         />
-                                        <span className={`absolute top-4 right-4 ${statusBadge.color} text-white text-xs font-medium px-4 py-2 tracking-[0.2em]`}>
+                                        <span className="absolute top-4 right-4 text-white text-xs font-medium px-4 py-2 tracking-[0.2em] rounded-full shadow-lg" style={{ backgroundColor: statusBadge.color }}>
                                             {statusBadge.text}
                                         </span>
                                     </div>
                                 </Link>
 
                                 <div className="py-6">
-                                    <h3 className="text-2xl font-serif text-gray-900 mb-3">
+                                    <h3 className="text-2xl font-serif text-[#0f1f2e] mb-3">
                                         {listing.title}
                                     </h3>
 
-                                    <p className="text-sm text-gray-600 mb-4">
+                                    <p className="text-sm text-[#2f3d4c] mb-4 flex items-center gap-2">
+                                        <MapPin className="w-4 h-4 text-[#d8a24a]" />
                                         {listing.address}
                                     </p>
 
-                                    <p className="text-sm text-gray-600 mb-6">
-                                        {listing.beds} Beds | {listing.baths} Baths | {listing.sqft} Sq.Ft.
+                                    <p className="text-sm text-[#2f3d4c] mb-6 flex flex-wrap gap-2">
+                                        <span className="px-3 py-1 rounded-full bg-[#f1e3c9] text-[#0f1f2e]">{listing.beds} Beds</span>
+                                        <span className="px-3 py-1 rounded-full bg-[#f1e3c9] text-[#0f1f2e]">{listing.baths} Baths</span>
+                                        <span className="px-3 py-1 rounded-full bg-[#f1e3c9] text-[#0f1f2e]">{listing.sqft} Sq.Ft.</span>
                                     </p>
 
-                                    <p className="text-3xl font-serif text-gray-900 mb-6">${formatPrice(listing.price)}</p>
+                                    <p className="text-3xl font-serif text-[#d8a24a] mb-6">${formatPrice(listing.price)}</p>
 
-                                    <button className="text-sm underline text-gray-900 hover:text-gray-600 transition-colors">
-                                        More Details
+                                    <button className="text-sm font-semibold px-4 py-2 bg-[#0f1f2e] text-[#f7f1e5] rounded-full hover:bg-[#1c3b57] transition-colors shadow-md">
+                                        View Details
                                     </button>
                                 </div>
                             </article>
@@ -200,22 +203,20 @@ export default function AllListings({ onBack }) {
 
                 {filteredListings.length === 0 && (
                     <div className="text-center py-20">
-                        <p className="text-gray-500 text-lg">No properties found in this category.</p>
+                        <p className="text-[#2f3d4c] text-lg">No properties found in this category.</p>
                     </div>
                 )}
             </main>
-
-            {/* Work With Me Section */}
-            <section className="relative h-screen">
+            {/* <section className="relative h-screen">
                 <div className="absolute inset-0">
                     <img
-                        src={'/images/Don4.jpg'}
-                        alt="Philip profile"
+                        src={'/images/jemey7.jpg'}
+                        alt="Jeremy profile"
                         className="w-full h-full object-cover"
-                        style={{ objectPosition: 'center 25%' }}
+                        style={{ objectPosition: 'center 35%' }}
                         draggable={false}
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-40" />
+                    <div className="absolute inset-0 bg-black bg-opacity-25" />
                 </div>
                 
                 <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-6">
@@ -235,7 +236,7 @@ export default function AllListings({ onBack }) {
                         </button>
                     </div>
                 </div>
-            </section>
+            </section> */}
             <Footer />
         </div>
     );

@@ -1,20 +1,27 @@
 import React from "react";
-import { Facebook, Linkedin } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-black text-white pt-10 pb-3 px-6">
+    <footer id="contact" className="bg-[#0f1f2e] text-[#f7f1e5] pt-10 pb-3 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
+          <div className="mb-8">
+            <img
+              src="/images/jemeylogo2.png"
+              alt="Logo"
+              className="h-24 md:h-28 w-auto object-contain"
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
+          </div>
           <h3 className="text-3xl tracking-widest mb-1 font-light">
-            Don Ashworth
+            Jeremy Denham
           </h3>
           <div className="mb-8 relative">
-            <h2 className="text-sm md:text-lg font-light text-white tracking-[0.3em] uppercase">
+            <h2 className="text-sm md:text-lg font-light text-[#f7f1e5] tracking-[0.3em] uppercase">
               Real Estate Agent
             </h2>
-            <h2 className="text-sm md:text-lg font-light text-white tracking-[0.3em] uppercase">
-              Watts Auction Realty Appr, Inc
+            <h2 className="text-sm md:text-lg font-light text-[#f7f1e5] tracking-[0.3em] uppercase">
+              Iron Star Team
             </h2>
 
             <div className="w-24 h-1 bg-yellow-400 mt-2"></div>
@@ -26,7 +33,7 @@ export default function Footer() {
                   LICENSED IN
                 </p>
                 <p className="text-sm tracking-widest font-light">
-                  Virginia, United state
+                  Texas, United States
                 </p>
               </div>
             </div>
@@ -52,10 +59,10 @@ export default function Footer() {
                         EMAIL
                       </p>
                       <a
-                        href="mailto:jus2c@hotmail.com"
-                        className="text-sm underline hover:opacity-70 font-light break-all"
+                        href="mailto:jeremywdenham@gmail.com"
+                          className="text-sm underline hover:opacity-70 font-light break-all"
                       >
-                        jus2c@hotmail.com
+                        jeremywdenham@gmail.com
                       </a>
                     </div>
                   </div>
@@ -86,7 +93,7 @@ export default function Footer() {
                         ADDRESS
                       </p>
                       <p className="text-sm font-light">
-                        7661 Wards Rd, Rustburg, VA 24588, United States
+                        402 Main ST. Silverton, TX, 79257
                       </p>
                     </div>
                   </div>
@@ -113,10 +120,10 @@ export default function Footer() {
                       PHONE NUMBER
                     </p>
                     <a
-                      href="tel:+14342217560"
+                      href="tel:+18063419160"
                       className="text-sm underline hover:opacity-70 font-light"
                     >
-                      +1 (434) 221-7560
+                      +1 (806) 341-9160
                     </a>
                   </div>
                 </div>
@@ -124,7 +131,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="border-t border-gray-800 pt-12 pb-8">
+          <div className="border-t border-[#1c2b3d] pt-12 pb-8">
             <div className="mb-6">
               <a
                 href="https://www.nar.realtor/fair-housing/what-everyone-should-know-about-equal-opportunity-housing"
@@ -133,35 +140,19 @@ export default function Footer() {
                 Fair Housing Notice
               </a>
             </div>
-            <p className="text-xs leading-relaxed text-gray-400 max-w-5xl mb-8 font-light">
-              Virginia-licensed real estate agent and auctioneer specializing in
-              homes, auctions, and investment properties. I put your needs first
-              and guide you every step of the way. Contact me today to explore
-              your real estate options!
+            <p className="text-xs leading-relaxed text-[#d8d2c7] max-w-5xl mb-8 font-light">
+              Jeremy Denham is dedicated to delivering honest guidance, strong
+              marketing, and dependable results. Every client receives
+              personalized attention and a smooth, stress-free real estate
+              experience. Your goals always come first.
             </p>
           </div>
 
-          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <div className="border-t border-[#1c2b3d] pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm mb-4 md:mb-0 font-light">
               Powered by <span className="font-medium">Realizty Inc</span>
             </p>
-            <div className="flex items-center space-x-6">
-              <p className="text-sm font-light">Copyright © 2025 | </p>
-              <div className="flex space-x-3">
-                <a
-                  href="https://www.linkedin.com/in/don-ashworth-4b2364135/"
-                  className="w-10 h-10 border border-white rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-                <a
-                  href="https://www.facebook.com/downtoearthdon/"
-                  className="w-10 h-10 border border-white rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors"
-                >
-                  <Facebook className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
+            <p className="text-sm font-light">Copyright © 2025</p>
           </div>
         </div>
       </div>

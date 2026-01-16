@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Menu, X, Facebook, Linkedin } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { getLenis } from '../lib/lenis';
 import ContactModal from './ContactModal';
@@ -10,6 +10,7 @@ export default function Header({ onBack, light = false }) {
     const lastScrollY = useRef(0);
     const ticking = useRef(false);
     const [atTop, setAtTop] = useState(true);
+    const [scrolledOnAllListings, setScrolledOnAllListings] = useState(false);
 
     // conditional classes for left/right sides: left is on black background
     // make header link text slightly larger and bolder
@@ -19,13 +20,11 @@ export default function Header({ onBack, light = false }) {
     const navigate = useNavigate();
     const location = useLocation();
     const isAllListings = location && location.pathname === '/all-listings';
-    // when header sits on a dark/black background (all listings) or when the split black bg is visible after scrolling, invert the logo to white
-    const useWhite = isAllListings;
-    // only invert the logo (not the link colors) when the background behind it is dark
-    const logoOnDarkBg = useWhite || !atTop;
-    const rightLinkClass = useWhite ? 'text-white font-semibold text-base md:text-lg hover:opacity-80 transition-opacity' : 'text-black font-semibold text-base md:text-lg hover:opacity-70 transition-opacity';
-    // icon: white on small screens only, black on sm+ (medium and large)
-    const rightIconClass = useWhite ? 'w-5 h-5 text-white' : 'w-5 h-5 text-white sm:text-black';
+    // On AllListings page: if scrolled, use black links; otherwise use white. On other pages, use dark ink.
+    const useWhite = isAllListings && !scrolledOnAllListings;
+    const rightLinkClass = useWhite ? 'text-white font-semibold text-base md:text-lg hover:opacity-80 transition-opacity' : 'text-[#0f1f2e] font-semibold text-base md:text-lg hover:opacity-70 transition-opacity';
+    // icon: white on small screens only, themed ink on sm+ (medium and large)
+    const rightIconClass = useWhite ? 'w-5 h-5 text-white' : 'w-5 h-5 text-white sm:text-[#0f1f2e]';
     const timeoutRef = useRef(null);
     const [contactOpen, setContactOpen] = useState(false);
 
@@ -64,6 +63,12 @@ export default function Header({ onBack, light = false }) {
             const handleScroll = (currentScrollY) => {
                 // track whether we're at the top of the page (used to hide split background)
                 setAtTop(currentScrollY <= 10);
+                
+                // On AllListings page, track if scrolled to change link color to black
+                if (isAllListings) {
+                    setScrolledOnAllListings(currentScrollY > 10);
+                }
+                
                 if (!ticking.current) {
                     window.requestAnimationFrame(() => {
                         const delta = currentScrollY - lastScrollY.current;
@@ -84,7 +89,7 @@ export default function Header({ onBack, light = false }) {
                 try { window.removeEventListener('scroll', _nativeHandler); } catch (e) { }
                 window.removeEventListener('openContactModal', onOpenContact);
             };
-    }, []);
+    }, [isAllListings]);
 
     // helper: smooth-scroll to an anchor hash using Lenis when available
     const scrollToHash = (hash) => {
@@ -153,17 +158,17 @@ export default function Header({ onBack, light = false }) {
             <header className={`fixed top-0 left-0 right-0 z-50 shadow-sm transform transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
                 {/* split background: left black, right white — always present but fades in/out smoothly */}
                 <div className={`absolute inset-0 pointer-events-none flex transition-opacity duration-500 ease-out ${atTop ? 'opacity-0' : 'opacity-100'}`}>
-                    <div className="w-1/2 bg-black" />
-                    <div className="w-1/2 bg-white" />
+                    <div className="w-1/2" style={{ backgroundColor: 'var(--color-ink)' }} />
+                    <div className="w-1/2" style={{ backgroundColor: 'var(--color-cream)' }} />
                 </div>
                 <div className="relative flex items-center justify-between px-8 py-6">
                     <div className="flex items-center">
                         <Link to="/">
                             <img
-                                src="/images/Donlogo.png"
+                                src="/images/jemeylogo1.png"
                                 alt="Concepcion Pena Logo"
                                 className="h-28 md:h-32 max-w-[260px] md:max-w-[320px] w-auto object-contain"
-                                style={{ filter: logoOnDarkBg ? 'brightness(0) invert(1)' : 'none', transition: 'filter 200ms ease' }}
+                                style={{ filter: 'none', transition: 'filter 200ms ease' }}
                             />
                         </Link>
                     </div>

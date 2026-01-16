@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -58,15 +60,28 @@ select:focus {
 	box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
 }
 
-/* Global heading font — use CompassSerif if available, fall back to common serif fonts */
+/* Global palette and typography */
 :root {
-	--heading-font: "CompassSerif", "Times New Roman", Georgia, serif;
+	--color-ink: #0f1f2e;      /* deep navy */
+	--color-sky: #1c3b57;      /* slate/blue */
+	--color-gold: #d8a24a;     /* warm gold */
+	--color-amber: #f5c15c;    /* accent yellow */
+	--color-cream: #f7f1e5;    /* soft parchment */
+	--color-sand: #c7a27a;     /* western sand */
+
+	--heading-font: 'Cinzel', 'Times New Roman', Georgia, serif;
+	--body-font: 'Libre Baskerville', 'Times New Roman', Georgia, serif;
 }
 
-/* Apply the heading font across all headings and any element using Tailwind's font-serif utility */
+body {
+	font-family: var(--body-font);
+	background: var(--color-cream);
+	color: var(--color-ink);
+}
+
+/* Apply heading font across all serif utilities */
 h1, h2, h3, h4, h5, h6, .font-serif {
 	font-family: var(--heading-font) !important;
-	/* preserve existing sizing utilities; only change family and smoothing */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

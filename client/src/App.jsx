@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
-import { X, Facebook, Linkedin } from "lucide-react";
+import { X } from "lucide-react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { getLenis } from "./lib/lenis";
@@ -317,7 +317,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#f7f1e5]">
       <PageLoader open={globalLoading} />
       <TransitionSplash />
       <Header />
@@ -327,58 +327,44 @@ export default function App() {
         <div className="grid md:grid-cols-2 h-[90vh]">
           <div className="relative h-full overflow-hidden">
             <img
-              src="images/Don1.jpg"
-              alt="Don Ashworth"
-              className="hero-image w-full h-full object-cover object-top transform translate-y-2 md:translate-y-4 scale-105"
+              src="images/jemey1.jpg"
+              alt="Jeremy Denham"
+              className="hero-image w-full h-full object-cover object-center transform translate-y-8"
             />
-            <div className="absolute bottom-8 left-8 flex space-x-3">
-              <a
-                href="https://www.linkedin.com/in/don-ashworth-4b2364135/"
-                className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md"
-              >
-                <Linkedin className="w-5 h-5 text-black" />
-              </a>
-              <a
-                href="https://www.facebook.com/downtoearthdon/"
-                className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md"
-              >
-                <Facebook className="w-5 h-5 text-black" />
-              </a>
-            </div>
           </div>
-          <div className="hero-right flex flex-col justify-start mt-20 md:mt-28 pt-16 md:pt-20 pb-6 px-12 md:px-20 bg-white h-full relative overflow-hidden">
-            <div className="absolute right-8 md:right-20 bottom-6 text-gray-100 text-8xl md:text-9xl font-serif font-bold opacity-10 pointer-events-none z-0">
-              Ashworth
+          <div className="hero-right flex flex-col justify-start mt-20 md:mt-28 pt-16 md:pt-20 pb-6 px-12 md:px-20 bg-[#f7f1e5] h-full relative overflow-hidden">
+            <div className="absolute right-8 md:right-20 bottom-6 text-[#d8a24a] text-8xl md:text-9xl font-serif font-bold opacity-15 pointer-events-none z-0">
+              Denham
             </div>
 
             <div className="relative z-10">
-              <h1 className="text-5xl md:text-6xl font-serif mb-3 text-black">
+              <h1 className="text-5xl md:text-6xl font-serif mb-3 text-[#0f1f2e]">
                 <span className="relative inline-block">
-                  Don
-                  <span className="absolute bottom-1 left-0 w-full h-3 bg-yellow-200 opacity-60 -z-10"></span>
+                  Jeremy
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#d8a24a] opacity-40 -z-10"></span>
                 </span>
-                Ashworth
+                Denham
               </h1>
               <div className="mb-8 relative">
-                <h2 className="text-2xl md:text-3xl font-light text-gray-700 tracking-[0.3em] uppercase">
+                <h2 className="text-2xl md:text-3xl font-light text-[#2f3d4c] tracking-[0.3em] uppercase">
                   Real Estate Agent
                 </h2>
-                <div className="w-24 h-1 bg-yellow-400 mt-3"></div>
+                <div className="w-24 h-1 bg-[#d8a24a] mt-3"></div>
               </div>
-              <p className="text-base leading-relaxed mb-5 text-gray-800 max-w-lg">
-                Looking to buy, sell, or invest in Virginia real estate? I’m a
-                licensed agent and auctioneer with years of experience in homes,
-                foreclosures, and investment properties. I help first-time
-                buyers, seasoned investors, and sellers make smart, confident
-                decisions. Let’s find the right opportunities for you and turn
-                your real estate goals into reality.
+              <p className="text-base leading-relaxed mb-5 text-[#2f3d4c] max-w-lg">
+                Buying or selling a home is more than a transaction; it’s a
+                major life milestone. Jeremy Denham is committed to guiding you
+                through the process with clarity, integrity, and results you can
+                trust. With a client-first mindset and a passion for real
+                estate, Jeremy helps turn goals into successful outcomes. Your
+                next move starts with confidence.
               </p>
               <div className="flex space-x-4">
                 <button
                   onClick={() =>
                     window.dispatchEvent(new CustomEvent("openContactModal"))
                   }
-                  className="px-8 py-3 bg-black text-white hover:bg-white hover:text-black hover:border-black border-2 border-transparent transition-all duration-300 font-medium inline-flex items-center justify-center"
+                  className="px-8 py-3 rounded-full font-semibold bg-[#d8a24a] text-[#0f1f2e] border-2 border-[#d8a24a] hover:bg-[#f5c15c] transition-all duration-200 shadow-[0_12px_30px_rgba(0,0,0,0.18)]"
                 >
                   Contact
                 </button>
@@ -388,7 +374,7 @@ export default function App() {
         </div>
 
         {/* Bottom Black Bar */}
-        <div className="bg-black text-white py-6 md:py-8 px-8 -mt-4 md:-mt-6 z-10 relative">
+        <div className="bg-[#0f1f2e] text-[#f7f1e5] py-6 md:py-8 px-8 -mt-4 md:-mt-6 z-10 relative">
           <div className="max-w-7xl mx-auto flex items-center justify-center">
             <div className="flex items-center space-x-2 text-xs md:text-sm">
               <svg
@@ -407,7 +393,7 @@ export default function App() {
               </span>
               <a
                 href="https://www.nar.realtor/fair-housing/what-everyone-should-know-about-equal-opportunity-housing"
-                className="underline hover:opacity-80 transition-opacity font-medium whitespace-nowrap"
+                className="underline hover:opacity-80 transition-opacity font-medium whitespace-nowrap text-[#d8a24a]"
               >
                 fair housing laws
               </a>
@@ -419,58 +405,58 @@ export default function App() {
       {/* Philip Scheinfeld Team Section */}
       <section
         id="team"
-        className="relative py-20 px-6 bg-gradient-to-br from-gray-200 to-gray-100 overflow-hidden"
+        className="relative py-20 px-6 bg-gradient-to-br from-[#f7f1e5] via-[#e6d7bd] to-[#d8a24a33] overflow-hidden"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none"></div>
 
         <div className="relative z-10 max-w-6xl mx-auto text-center">
-          <p className="text-xs tracking-[0.3em] mb-6 text-gray-800 font-light">
+          <p className="text-xs tracking-[0.3em] mb-6 text-[#d8a24a] font-light">
             UNPARALLELED MARKETING. WHITE GLOVE SERVICE.
           </p>
-          <div className="w-16 h-px bg-gray-800 mx-auto mb-6"></div>
-          <h2 className="text-5xl md:text-6xl font-light mb-3 tracking-[0.4em] text-black">
-            Don Ashworth
+          <div className="w-16 h-px bg-[#d8a24a] mx-auto mb-6"></div>
+          <h2 className="text-5xl md:text-6xl font-light mb-3 tracking-[0.4em] text-[#0f1f2e]">
+            Jeremy Denham
           </h2>
           <div className="mb-8 relative">
-            <h2 className="text-2xl md:text-3xl font-light text-gray-700 tracking-[0.3em] uppercase">
+            <h2 className="text-2xl md:text-3xl font-light text-[#2f3d4c] tracking-[0.3em] uppercase">
               Real Estate Agent
             </h2>
           </div>
-          <p className="text-base leading-relaxed mb-16 max-w-5xl mx-auto text-gray-800">
-            Driven by a commitment to excellence, Concepcion Pena serves a
+          <p className="text-base leading-relaxed mb-16 max-w-5xl mx-auto text-[#2f3d4c]">
+            Driven by a commitment to excellence, Jeremy Denham serves a
             steadily growing network of buyers, sellers, investors, and
             relocating families across Ottawa and the surrounding markets.
-            Concepcion is known for delivering clear, data-backed real estate
+            Jeremy is known for delivering clear, data-backed real estate
             insight paired with an unwavering dedication to client success. His
             approach blends strategic marketing, sharp market intelligence, and
             a concierge level service experience, making it easy to see why
-            clients consistently choose Concepcion to lead their most important
-            real estate decisions.
+            clients consistently choose Jeremy Denham to lead their most
+            important real estate decisions.
           </p>
           <div className="grid md:grid-cols-3 gap-12 mt-16">
             <div>
-              <h3 className="text-3xl font-light mb-4 tracking-wider">
+              <h3 className="text-3xl font-light mb-4 tracking-wider text-[#0f1f2e]">
                 Top-Tier Local Expertise
               </h3>
-              <p className="text-sm text-gray-700 leading-relaxed">
+              <p className="text-sm text-[#2f3d4c] leading-relaxed">
                 Recognized for deep market knowledge and exceptional negotiation
                 skills.
               </p>
             </div>
             <div>
-              <h3 className="text-3xl font-light mb-4 tracking-wider">
+              <h3 className="text-3xl font-light mb-4 tracking-wider text-[#0f1f2e]">
                 Hundreds of Successful Client Relationships
               </h3>
-              <p className="text-sm text-gray-700 leading-relaxed">
+              <p className="text-sm text-[#2f3d4c] leading-relaxed">
                 Built on trust, transparency, and a client-first philosophy.
               </p>
             </div>
             <div>
-              <h3 className="text-3xl font-light mb-4 tracking-wider">
+              <h3 className="text-3xl font-light mb-4 tracking-wider text-[#0f1f2e]">
                 Record-Level Client Satisfaction
               </h3>
-              <p className="text-sm text-gray-700 leading-relaxed">
+              <p className="text-sm text-[#2f3d4c] leading-relaxed">
                 A reputation defined by results, professionalism, and consistent
                 performance.
               </p>
@@ -480,7 +466,7 @@ export default function App() {
       </section>
 
       {/* Featured Listing Section (shows latest listing dynamically) */}
-      <section id="listings" className="py-20 px-6 bg-black text-white">
+      <section id="listings" className="py-20 px-6 bg-[#0f1f2e] text-[#f7f1e5]">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-0">
           <div className="relative">
             <img
@@ -540,18 +526,18 @@ export default function App() {
               {featuredListing ? (
                 <Link
                   to={`/listing/${featuredListing._id}`}
-                  className="px-8 py-3 bg-white text-black hover:bg-gray-100 transition-colors"
+                  className="px-8 py-3 rounded-full font-semibold bg-[#d8a24a] text-[#0f1f2e] border-2 border-[#d8a24a] hover:bg-[#f5c15c] transition-all duration-200 shadow-[0_12px_30px_rgba(0,0,0,0.18)]"
                 >
                   View Listing
                 </Link>
               ) : (
-                <button className="px-8 py-3 bg-white text-black hover:bg-gray-100 transition-colors">
+                <button className="px-8 py-3 rounded-full font-semibold bg-[#d8a24a] text-[#0f1f2e] border-2 border-[#d8a24a] hover:bg-[#f5c15c] transition-all duration-200 shadow-[0_12px_30px_rgba(0,0,0,0.18)]">
                   View Listing
                 </button>
               )}
               <Link
                 to="/all-listings"
-                className="px-8 py-3 border-2 border-white text-white hover:bg-white hover:text-black transition-colors inline-flex items-center justify-center"
+                className="px-8 py-3 rounded-full font-semibold border-2 border-[#f7f1e5] text-[#f7f1e5] hover:bg-[#d8a24a] hover:border-[#d8a24a] hover:text-[#0f1f2e] transition-all duration-200 inline-flex items-center justify-center shadow-[0_12px_30px_rgba(0,0,0,0.18)]"
               >
                 View All
               </Link>
@@ -560,44 +546,32 @@ export default function App() {
         </div>
       </section>
 
-      {/* Featured Video Section */}
-      <section id="video" className="py-20 px-6 bg-white">
+      {/* Featured Video / About Section */}
+      <section id="video" className="py-20 px-6 bg-[#f7f1e5]">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl md:text-5xl font-serif mb-8">About Me</h2>
-            <p className="text-base leading-relaxed mb-8 text-gray-700">
-              Born and raised in Virginia, I know the value of home and
-              community. My real estate journey began in the late 1980s, and
-              I’ve since helped clients buy and sell HUD homes, foreclosures,
-              bank-owned properties, and more. In 2015, I became a licensed real
-              estate agent, and in 2017, I earned my auctioneer license. I
-              specialize in guiding first-time buyers, investors, and sellers
-              through every step of the process. With estate, farm, and
-              consignment auctions throughout the year, I provide opportunities
-              that other agents can’t. My mission is simple: understand your
-              goals and help you achieve them.
+            <h2 className="text-4xl md:text-5xl font-serif mb-4 text-[#0f1f2e]">About Me</h2>
+            <div className="w-16 h-1 bg-[#d8a24a] mb-6" />
+            <p className="text-base leading-relaxed mb-8 text-[#2f3d4c]">
+              I’m Jeremy Denham, a real estate professional who believes success
+              starts with trust and clear communication. I work closely with
+              buyers and sellers to understand their goals and create strategies
+              that deliver real results. Every transaction is handled with
+              professionalism, transparency, and care from start to finish. I
+              take pride in making the process simple, informed, and
+              stress-free. Whether you’re buying your first home or selling your
+              next one, I’m here to guide you every step of the way.
             </p>
-            <div className="flex space-x-4">
-              <a
-                href="https://www.linkedin.com/in/don-ashworth-4b2364135/"
-                className="w-10 h-10 border border-white rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href="https://www.facebook.com/downtoearthdon/"
-                className="w-10 h-10 border border-white rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-            </div>
           </div>
-          <div className="relative w-full">
-            <img
-              src="/images/Don6.png"
-              alt="Don Ashworth"
-              className="w-full h-auto object-cover rounded"
-            />
+          <div className="relative w-full flex justify-center md:justify-end">
+            <div className="relative w-10/12 md:w-9/12 lg:w-8/12 max-w-md">
+              <div className="absolute -inset-4 rounded-3xl bg-[#d8a24a] opacity-30 blur-xl" aria-hidden="true" />
+              <img
+                src="/images/jemey2.jpg"
+                alt="Jeremy Denham"
+                className="w-full h-auto object-cover rounded-3xl border border-[#e5d8c4] shadow-[0_18px_45px_rgba(15,31,46,0.12)] hover:shadow-[0_26px_60px_rgba(15,31,46,0.18)] transition-shadow duration-300"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -825,17 +799,17 @@ export default function App() {
               showPopup
                 ? "scale-100 opacity-100 translate-y-0"
                 : "scale-90 opacity-0 translate-y-8"
-            } ${popupSubmitted ? "bg-white" : ""}`}
+            } ${popupSubmitted ? "bg-[#f7f1e5]" : ""}`}
             style={{
-              backgroundColor: popupSubmitted ? "#ffffff" : "#141414",
+              backgroundColor: popupSubmitted ? "#f7f1e5" : "#0f1f2e",
               maxHeight: "90vh",
             }}
           >
             <button
               onClick={() => setShowPopup(false)}
-              className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 hover:rotate-90"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-[#d8a24a] bg-opacity-80 hover:bg-opacity-100 transition-all duration-300 hover:rotate-90"
             >
-              <X className="w-5 h-5 text-black" />
+              <X className="w-5 h-5 text-[#0f1f2e]" />
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-5 max-h-[90vh] overflow-y-auto">
@@ -853,7 +827,7 @@ export default function App() {
                   }`}
                 />
                 <div
-                  className={`absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-opacity duration-700 ${
+                    className={`absolute inset-0 bg-gradient-to-t from-[#0f1f2e] via-transparent to-transparent transition-opacity duration-700 ${
                     popupSubmitted ? "opacity-30" : "opacity-60"
                   }`}
                 />
@@ -861,14 +835,17 @@ export default function App() {
 
               {/* Right Side - Scrollable Content */}
               <div
-                className={`p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col transition-all duration-700 md:col-span-3 overflow-y-auto bg-white`}
+                className={`p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col transition-all duration-700 md:col-span-3 overflow-y-auto bg-[#f7f1e5]`}
               >
                 {!popupSubmitted ? (
                   <div className="animate-slideInRight">
-                    <h2 className="text-lg sm:text-xl md:text-2xl font-light mb-2 text-black tracking-wide">
-                      NOT READY TO START YOUR SEARCH YET?
+                    <h2 className="text-lg sm:text-xl md:text-2xl font-light mb-2 text-[#0f1f2e] tracking-wide">
+                      NOT READY TO START YOUR
                     </h2>
-                    <p className="text-gray-700 mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base leading-relaxed">
+                    <h2 className="text-lg sm:text-xl md:text-2xl font-light mb-2 text-[#d8a24a] tracking-wide">
+                      SEARCH YET?
+                    </h2>
+                    <p className="text-[#2f3d4c] mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base leading-relaxed">
                       No worries! We can keep you up to date on the market and
                       add you to a curated Collection.
                     </p>
@@ -878,7 +855,7 @@ export default function App() {
                       className="space-y-3 sm:space-y-4 md:space-y-5 mb-4 sm:mb-6"
                     >
                       <div>
-                        <label className="block text-xs text-black mb-2 tracking-wide font-medium">
+                        <label className="block text-xs text-[#0f1f2e] mb-2 tracking-wide font-medium">
                           Name
                         </label>
                         <input
@@ -887,13 +864,13 @@ export default function App() {
                           value={formData.name}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-black transition-all text-sm sm:text-base"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border border-[#d8a24a]/30 text-[#0f1f2e] placeholder-[#9c8a6b] focus:outline-none focus:border-[#d8a24a] focus:ring-2 focus:ring-[#d8a24a]/20 transition-all text-sm sm:text-base"
                           placeholder=""
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs text-black mb-2 tracking-wide font-medium">
+                        <label className="block text-xs text-[#0f1f2e] mb-2 tracking-wide font-medium">
                           Phone
                         </label>
                         <input
@@ -902,12 +879,12 @@ export default function App() {
                           value={formData.phone}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-black transition-all text-sm sm:text-base"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border border-[#d8a24a]/30 text-[#0f1f2e] placeholder-[#9c8a6b] focus:outline-none focus:border-[#d8a24a] focus:ring-2 focus:ring-[#d8a24a]/20 transition-all text-sm sm:text-base"
                           placeholder=""
                         />
                       </div>
                       <div>
-                        <label className="block text-xs text-black mb-2 tracking-wide font-medium">
+                        <label className="block text-xs text-[#0f1f2e] mb-2 tracking-wide font-medium">
                           Email
                         </label>
                         <input
@@ -916,7 +893,7 @@ export default function App() {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-black transition-all text-sm sm:text-base"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border border-[#d8a24a]/30 text-[#0f1f2e] placeholder-[#9c8a6b] focus:outline-none focus:border-[#d8a24a] focus:ring-2 focus:ring-[#d8a24a]/20 transition-all text-sm sm:text-base"
                           placeholder=""
                         />
                       </div>
@@ -926,15 +903,15 @@ export default function App() {
                           type="checkbox"
                           id="consent"
                           required
-                          className="mt-1 w-4 h-4 border-gray-300"
+                          className="mt-1 w-4 h-4 border-[#d8a24a] accent-[#d8a24a]"
                         />
                         <label
                           htmlFor="consent"
-                          className="text-xs text-gray-700 leading-relaxed"
+                          className="text-xs text-[#2f3d4c] leading-relaxed"
                         >
-                          By providing The Philip Parnanzone your contact
+                          By providing your contact
                           information, you acknowledge and agree to our{" "}
-                          <a href="#" className="underline hover:text-black">
+                          <a href="#" className="underline hover:text-[#0f1f2e] text-[#d8a24a]">
                             Privacy Policy
                           </a>{" "}
                           and consent to receiving marketing communications,
@@ -948,7 +925,7 @@ export default function App() {
 
                       <button
                         type="submit"
-                        className="w-full py-3 sm:py-4 bg-black text-white font-semibold tracking-widest hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg text-xs sm:text-sm"
+                        className="w-full py-3 sm:py-4 bg-[#d8a24a] text-[#0f1f2e] font-semibold tracking-widest hover:bg-[#f5c15c] transition-all duration-300 transform hover:scale-105 shadow-[0_12px_30px_rgba(216,162,74,0.3)] text-xs sm:text-sm rounded-full"
                       >
                         SUBSCRIBE NOW
                       </button>
@@ -956,9 +933,9 @@ export default function App() {
                   </div>
                 ) : (
                   <div className="text-center animate-fadeInUp flex flex-col justify-center h-full py-8">
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 animate-scaleIn">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#d8a24a] rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 animate-scaleIn">
                       <svg
-                        className="w-6 h-6 sm:w-8 sm:h-8 text-white"
+                        className="w-6 h-6 sm:w-8 sm:h-8 text-[#0f1f2e]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -971,16 +948,16 @@ export default function App() {
                         />
                       </svg>
                     </div>
-                    <h2 className="text-2xl sm:text-3xl font-serif mb-3 sm:mb-4 text-black">
+                    <h2 className="text-2xl sm:text-3xl font-serif mb-3 sm:mb-4 text-[#0f1f2e]">
                       Thank You!
                     </h2>
-                    <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 px-4">
+                    <p className="text-sm sm:text-base text-[#2f3d4c] mb-4 sm:mb-6 px-4">
                       We've received your information and will be in touch
                       shortly with exclusive property updates.
                     </p>
                     <button
                       onClick={() => setShowPopup(false)}
-                      className="px-6 sm:px-8 py-2 sm:py-3 bg-black text-white hover:bg-gray-800 transition-colors font-medium mx-auto text-sm sm:text-base"
+                      className="px-6 sm:px-8 py-2 sm:py-3 bg-[#d8a24a] text-[#0f1f2e] hover:bg-[#f5c15c] transition-all duration-200 font-medium mx-auto text-sm sm:text-base rounded-full shadow-[0_12px_30px_rgba(216,162,74,0.3)]"
                     >
                       Continue Exploring
                     </button>

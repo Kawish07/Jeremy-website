@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Facebook, Linkedin } from 'lucide-react';
+import { X } from 'lucide-react';
 import { API } from '../lib/image';
 
 export default function ContactModal({ open = false, onClose = () => { } }) {
@@ -125,73 +125,66 @@ export default function ContactModal({ open = false, onClose = () => { } }) {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 min-h-[95vh]">
                         {/* Left details */}
-                        <div className="relative py-8 md:py-16">
+                        <div className="relative py-8 md:py-16 bg-gradient-to-br from-[#0f1f2e] via-[#132a3c] to-[#1c3b57]">
                             <div className="p-8 md:p-16 relative z-10 flex items-start">
                                 <div className="max-w-md">
-                                    <h2 className="text-white text-3xl md:text-4xl font-light mb-6">CONTACT DETAILS</h2>
-                                    <p className="text-white/80 mb-6">Reach out to us for inquiries, showings, and partnerships.</p>
+                                    <h2 className="text-[#d8a24a] text-3xl md:text-4xl font-light mb-2">CONTACT</h2>
+                                    <h2 className="text-[#f7f1e5] text-3xl md:text-4xl font-light mb-6">DETAILS</h2>
+                                    <p className="text-[#d8d2c7] mb-6">Reach out to us for inquiries, showings, and partnerships.</p>
 
                                     <div className="space-y-6">
                                         <div>
-                                            <p className="text-white text-sm">PHONE</p>
-                                            <p className="text-white">+1 (434) 221-7560</p>
+                                            <p className="text-[#d8a24a] text-sm tracking-widest font-medium">PHONE</p>
+                                            <p className="text-[#f7f1e5] mt-2">+1 (806) 341-9160</p>
                                         </div>
                                         <div>
-                                            <p className="text-white text-sm">EMAIL</p>
-                                            <p className="text-white">jus2c@hotmail.com</p>
+                                            <p className="text-[#d8a24a] text-sm tracking-widest font-medium">EMAIL</p>
+                                            <p className="text-[#f7f1e5] mt-2">jeremywdenham@gmail.com</p>
                                         </div>
                                         <div>
-                                            <p className="text-white text-sm">ADDRESS</p>
-                                            <p className="text-white">10600 Montwood Dr Suite #125, El Paso, TX 79935, United States</p>
+                                            <p className="text-[#d8a24a] text-sm tracking-widest font-medium">ADDRESS</p>
+                                            <p className="text-[#f7f1e5] mt-2">402 Main ST. Silverton, TX, 79257</p>
                                         </div>
-                                    </div>
-
-                                    <div className="mt-8 flex gap-4">
-                                        <a href='https://www.linkedin.com/in/don-ashworth-4b2364135/' className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition">
-                                            <Linkedin className="w-4 h-4 text-white" />
-                                        </a>
-                                        <a href='https://www.facebook.com/downtoearthdon/' className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition">
-                                            <Facebook className="w-4 h-4 text-white" />
-                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Right form */}
-                        <div className="p-6 md:p-16 py-8 md:py-16 flex items-center relative z-10">
+                        <div className="p-6 md:p-16 py-8 md:py-16 flex items-center relative z-10 bg-gradient-to-br from-[#1c3b57] via-[#132a3c] to-[#0f1f2e]">
                             <div className="max-w-md mx-auto w-full">
                                 {success ? (
                                     <div className="text-center py-12">
-                                        <h3 className="text-2xl text-white mb-4">Message Sent</h3>
-                                        <p className="text-white/80">Thanks — we received your message. We'll respond shortly.</p>
+                                        <h3 className="text-2xl text-[#d8a24a] mb-4 font-light">Message Sent</h3>
+                                        <p className="text-[#d8d2c7]">Thanks — we received your message. We'll respond shortly.</p>
                                     </div>
                                 ) : (
                                     <>
-                                        <h2 className="text-white text-3xl md:text-4xl font-light mb-4">SUBMIT A MESSAGE</h2>
+                                        <h2 className="text-[#d8a24a] text-3xl md:text-4xl font-light mb-4">SUBMIT A</h2>
+                                        <h2 className="text-[#f7f1e5] text-3xl md:text-4xl font-light mb-6">MESSAGE</h2>
 
                                         <form onSubmit={handleSubmit} className="space-y-4">
                                             <div>
-                                                <label className="text-white/80 text-xs">Name</label>
-                                                <input name="name" value={form.name} onChange={handleChange} className="w-full bg-transparent border-b border-white/30 text-white py-2 focus:outline-none" />
+                                                <label className="text-[#d8d2c7] text-xs tracking-widest font-medium">Name</label>
+                                                <input name="name" value={form.name} onChange={handleChange} className="w-full bg-transparent border-b border-[#d8a24a]/40 text-[#f7f1e5] py-2 focus:outline-none focus:border-[#d8a24a] transition-colors" />
                                             </div>
                                             <div>
-                                                <label className="text-white/80 text-xs">Email</label>
-                                                <input name="email" value={form.email} onChange={handleChange} className="w-full bg-transparent border-b border-white/30 text-white py-2 focus:outline-none" />
+                                                <label className="text-[#d8d2c7] text-xs tracking-widest font-medium">Email</label>
+                                                <input name="email" value={form.email} onChange={handleChange} className="w-full bg-transparent border-b border-[#d8a24a]/40 text-[#f7f1e5] py-2 focus:outline-none focus:border-[#d8a24a] transition-colors" />
                                             </div>
                                             <div>
-                                                <label className="text-white/80 text-xs">Phone</label>
-                                                <input name="phone" value={form.phone} onChange={handleChange} className="w-full bg-transparent border-b border-white/30 text-white py-2 focus:outline-none" />
+                                                <label className="text-[#d8d2c7] text-xs tracking-widest font-medium">Phone</label>
+                                                <input name="phone" value={form.phone} onChange={handleChange} className="w-full bg-transparent border-b border-[#d8a24a]/40 text-[#f7f1e5] py-2 focus:outline-none focus:border-[#d8a24a] transition-colors" />
                                             </div>
                                             <div>
-                                                <label className="text-white/80 text-xs">Best time to get in touch (Eastern Time Zone)</label>
-                                                <input name="bestTime" type="datetime-local" value={form.bestTime} onChange={handleChange} className="w-full bg-transparent border border-white/30 text-white py-2 px-3 focus:outline-none h-12" />
+                                                <label className="text-[#d8d2c7] text-xs tracking-widest font-medium">Best time to get in touch (Eastern Time Zone)</label>
+                                                <input name="bestTime" type="datetime-local" value={form.bestTime} onChange={handleChange} className="w-full bg-transparent border border-[#d8a24a]/40 text-[#f7f1e5] py-2 px-3 focus:outline-none focus:border-[#d8a24a] h-12 transition-colors" />
                                             </div>
 
                                             {error && <p className="text-red-400 text-sm">{error}</p>}
 
                                             <div>
-                                                <button type="submit" disabled={loading} className="w-full bg-white text-black py-3 disabled:opacity-50">{loading ? 'SENDING...' : 'Send Message'}</button>
+                                                <button type="submit" disabled={loading} className="w-full bg-[#d8a24a] text-[#0f1f2e] py-3 disabled:opacity-50 font-semibold hover:bg-[#f5c15c] transition-all duration-200 rounded-full shadow-[0_12px_30px_rgba(216,162,74,0.3)]">{loading ? 'SENDING...' : 'Send Message'}</button>
                                             </div>
                                         </form>
                                     </>
